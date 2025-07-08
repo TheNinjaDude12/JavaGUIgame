@@ -10,7 +10,12 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo20.HelloController">
    <children>
-      <ImageView fitHeight="693.0" fitWidth="624.0" layoutX="479.0" layoutY="115.0">
+      <ImageView fitHeight="1080.0" fitWidth="1920.0">
+         <image>
+            <Image url="@../../../background.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="700.0" fitWidth="640.0" layoutX="479.0" layoutY="115.0">
          <image>
             <Image url="@../../../WarriorAssets/warrior.jpg" />
          </image>
@@ -68,26 +73,47 @@
             </Text>
          </children>
       </VBox>
-      <Button fx:id="lightArmorButton" layoutX="1208.0" layoutY="227.0" mnemonicParsing="false" onAction="#wearLightArmor" prefHeight="133.0" prefWidth="222.0" text="Light">
+      <Button fx:id="lightArmorButton" layoutX="1182.0" layoutY="231.0" mnemonicParsing="false" onAction="#wearLightArmor" prefHeight="133.0" prefWidth="222.0" text="Light">
          <font>
             <Font size="41.0" />
          </font>
       </Button>
-      <Button fx:id="mediumArmorButton" layoutX="1213.0" layoutY="424.0" mnemonicParsing="false" onAction="#wearMediumArmor" prefHeight="133.0" prefWidth="222.0" text="Medium">
+      <Button fx:id="mediumArmorButton" layoutX="1182.0" layoutY="415.0" mnemonicParsing="false" onAction="#wearMediumArmor" prefHeight="133.0" prefWidth="222.0" text="Medium">
          <font>
             <Font size="42.0" />
          </font>
       </Button>
-      <Button fx:id="heavyArmorButton" layoutX="1215.0" layoutY="634.0" mnemonicParsing="false" onAction="#wearHeavyArmor" prefHeight="133.0" prefWidth="222.0" text="Heavy">
+      <Button fx:id="heavyArmorButton" layoutX="1182.0" layoutY="616.0" mnemonicParsing="false" onAction="#wearHeavyArmor" prefHeight="133.0" prefWidth="222.0" text="Heavy">
          <font>
             <Font size="48.0" />
          </font>
       </Button>
-      <Text layoutX="1200.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Armor" wrappingWidth="286.13671875">
+      <Text layoutX="1172.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Armor" wrappingWidth="286.13671875">
          <font>
             <Font size="88.0" />
          </font>
       </Text>
-      <ImageView fx:id="armorView" fitHeight="226.0" fitWidth="226.0" layoutX="684.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="armorView" fitHeight="233.0" fitWidth="240.0" layoutX="665.0" layoutY="304.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="1502.0" layoutY="234.0" mnemonicParsing="false" onAction="#useDagger" prefHeight="133.0" prefWidth="222.0" text="Dagger">
+         <font>
+            <Font size="41.0" />
+         </font>
+      </Button>
+      <Button fx:id="mediumArmorButton1" layoutX="1502.0" layoutY="418.0" mnemonicParsing="false" onAction="#useSword" prefHeight="133.0" prefWidth="222.0" text="Sword">
+         <font>
+            <Font size="42.0" />
+         </font>
+      </Button>
+      <Button fx:id="heavyArmorButton1" layoutX="1502.0" layoutY="619.0" mnemonicParsing="false" onAction="#useAxe" prefHeight="133.0" prefWidth="222.0" text="Axe">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Button>
+      <Text layoutX="1492.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Weapon" wrappingWidth="286.13671875">
+         <font>
+            <Font size="62.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="weaponView" fitHeight="279.0" fitWidth="186.0" layoutX="915.0" layoutY="263.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

@@ -41,6 +41,8 @@ public class HelloController {
     Button heavyArmorButton = new Button();
     @FXML
     ImageView armorView = new ImageView();
+    @FXML
+    ImageView weaponView = new ImageView();
 
     public void initialize() {
         warrior = new Warrior();
@@ -68,25 +70,97 @@ public class HelloController {
     }
 
     public void wearLightArmor(ActionEvent e) {
-        Image lightArmorImage = new Image(getClass().getResource("/WarriorAssets/leather.png").toExternalForm());
-        armorView.setImage(lightArmorImage);
+
+        warrior.setDefense(1);
+        if(warrior.getWeapon() != null) {
+            warrior.setSpeed(50 - warrior.getWeapon().getSpeedPenalty());
+        }
+        else {
+            warrior.setSpeed(50);
+        }
+
         warrior.equip(lightArmor);
         setStats();
+        Image lightArmorImage = new Image(getClass().getResource("/WarriorAssets/leather.png").toExternalForm());
+        armorView.setImage(lightArmorImage);
     }
 
     public void wearMediumArmor(ActionEvent e) {
-        Image mediumArmorImage = new Image(getClass().getResource("/WarriorAssets/2811d2cdb07721c.png").toExternalForm());
-        armorView.setImage(mediumArmorImage);
+
+        warrior.setDefense(1);
+        if(warrior.getWeapon() != null) {
+            warrior.setSpeed(50 - warrior.getWeapon().getSpeedPenalty());
+        }
+        else {
+            warrior.setSpeed(50);
+        }
         warrior.equip(mediumArmor);
         setStats();
+        Image mediumArmorImage = new Image(getClass().getResource("/WarriorAssets/2811d2cdb07721c.png").toExternalForm());
+        armorView.setImage(mediumArmorImage);
 
     }
 
     public void wearHeavyArmor(ActionEvent e) {
-        Image heavyArmorImage = new Image(getClass().getResource("/WarriorAssets/heavyarmor.jpg").toExternalForm());
-        armorView.setImage(heavyArmorImage);
+
+
+        warrior.setDefense(1);
+        if(warrior.getWeapon() != null) {
+            warrior.setSpeed(50 - warrior.getWeapon().getSpeedPenalty());
+        }
+        else {
+            warrior.setSpeed(50);
+        }
+
         warrior.equip(heavyArmor);
         setStats();
+        Image heavyArmorImage = new Image(getClass().getResource("/WarriorAssets/heavyarmor.jpg").toExternalForm());
+        armorView.setImage(heavyArmorImage);
+
+    }
+
+    public void useDagger() {
+        warrior.setAttack(1);
+        if(warrior.getArmor() != null) {
+            warrior.setSpeed(50 - warrior.getArmor().getSpeedPenalty());
+        }
+        else {
+            warrior.setSpeed(50);
+        }
+        warrior.equip(dagger);
+        setStats();
+        Image daggerImage = new Image(getClass().getResource("/WarriorAssets/Dagger.jpg").toExternalForm());
+        weaponView.setImage(daggerImage);
+
+    }
+
+    public void useSword() {
+        warrior.setAttack(1);
+        if(warrior.getArmor() != null) {
+            warrior.setSpeed(50 - warrior.getArmor().getSpeedPenalty());
+        }
+        else {
+            warrior.setSpeed(50);
+        }
+        warrior.equip(sword);
+        setStats();
+        Image swordImage = new Image(getClass().getResource("/WarriorAssets/Sword.jpg").toExternalForm());
+        weaponView.setImage(swordImage);
+
+    }
+
+    public void useAxe() {
+        warrior.setAttack(1);
+        if(warrior.getArmor() != null) {
+            warrior.setSpeed(50 - warrior.getArmor().getSpeedPenalty());
+        }
+        else {
+            warrior.setSpeed(50);
+        }
+        warrior.equip(battleaxe);
+        setStats();
+        Image axeImage = new Image(getClass().getResource("/WarriorAssets/Battleaxer.jpg").toExternalForm());
+        weaponView.setImage(axeImage);
 
     }
 
