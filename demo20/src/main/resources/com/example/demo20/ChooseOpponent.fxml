@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo20.chooseOpponentController">
+   <children>
+      <ImageView fitHeight="1080.0" fitWidth="1920.0">
+         <image>
+            <Image url="@../../../background.jpg" />
+         </image>
+      </ImageView>
+      <Text layoutX="141.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stats" wrappingWidth="286.13671875">
+         <font>
+            <Font size="88.0" />
+         </font>
+      </Text>
+      <VBox layoutX="135.0" layoutY="200.0" prefHeight="408.0" prefWidth="115.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="HP" wrappingWidth="184.13671875">
+               <font>
+                  <Font size="68.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="DEF" wrappingWidth="184.13671875">
+               <font>
+                  <Font size="68.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ATK" wrappingWidth="184.13671875">
+               <font>
+                  <Font size="68.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SPD" wrappingWidth="184.13671875">
+               <font>
+                  <Font size="68.0" />
+               </font>
+            </Text>
+         </children>
+      </VBox>
+      <VBox layoutX="273.0" layoutY="195.0" prefHeight="408.0" prefWidth="115.0">
+         <children>
+            <Text fx:id="hp" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="184.13671875">
+               <font>
+                  <Font size="68.0" />
+               </font>
+            </Text>
+            <Text fx:id="def" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="184.13671875">
+               <font>
+                  <Font size="68.0" />
+               </font>
+            </Text>
+            <Text fx:id="atk" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="184.13671875">
+               <font>
+                  <Font size="68.0" />
+               </font>
+            </Text>
+            <Text fx:id="spd" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="184.13671875">
+               <font>
+                  <Font size="68.0" />
+               </font>
+            </Text>
+         </children>
+      </VBox>
+      <Button layoutX="1253.0" layoutY="188.0" mnemonicParsing="false" onAction="#thiefSelect" prefHeight="133.0" prefWidth="352.0" text="Thief">
+         <font>
+            <Font size="41.0" />
+         </font>
+      </Button>
+      <Button fx:id="vikingButton" layoutX="1249.0" layoutY="397.0" mnemonicParsing="false" onAction="#vikingSelect" prefHeight="133.0" prefWidth="356.0" text="Viking">
+         <font>
+            <Font size="42.0" />
+         </font>
+      </Button>
+      <Button fx:id="minotaurButton" layoutX="1251.0" layoutY="635.0" mnemonicParsing="false" onAction="#minotaurSelect" prefHeight="133.0" prefWidth="346.0" text="Minotaur">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Button>
+      <Text layoutX="1234.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Opponent" wrappingWidth="434.13671875">
+         <font>
+            <Font size="88.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="opponentView" fitHeight="656.0" fitWidth="670.0" layoutX="452.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="494.0" layoutY="768.0" mnemonicParsing="false" onAction="#backButton" prefHeight="71.0" prefWidth="220.0" text="Back" />
+      <Button layoutX="794.0" layoutY="768.0" mnemonicParsing="false" onAction="#nextButton" prefHeight="71.0" prefWidth="220.0" text="Next" />
+   </children>
+</AnchorPane>

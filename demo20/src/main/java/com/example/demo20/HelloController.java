@@ -18,7 +18,7 @@ import javafx.fxml.FXMLLoader;
 import java.io.IOException;
 
 public class HelloController {
-    Warrior warrior;
+    static Warrior warrior = new Warrior();
     Weapon dagger = new Weapon("Dagger", 20, 0);
     Weapon sword = new Weapon("Sword", 30, 10);
     Weapon battleaxe = new Weapon("Battleaxe", 40, 20);
@@ -40,16 +40,47 @@ public class HelloController {
     @FXML
     Button heavyArmorButton = new Button();
     @FXML
+    Button nextButton = new Button();
+    @FXML
     ImageView armorView = new ImageView();
     @FXML
     ImageView weaponView = new ImageView();
 
     public void initialize() {
-        warrior = new Warrior();
         hp.setText(""+warrior.getHitPoints());
         def.setText(""+warrior.getDefense());
         atk.setText(""+warrior.getAttack());
         spd.setText(""+warrior.getSpeed());
+        if(warrior.getArmor()!=null &&warrior.getArmor().getName().equals("Light Armor")) {
+            setStats();
+            Image lightArmorImage = new Image(getClass().getResource("/WarriorAssets/leather.png").toExternalForm());
+            armorView.setImage(lightArmorImage);
+        }
+        if(warrior.getArmor()!=null &&warrior.getArmor().getName().equals("Medium Armor")) {
+            setStats();
+            Image mediumArmorImage = new Image(getClass().getResource("/WarriorAssets/2811d2cdb07721c.png").toExternalForm());
+            armorView.setImage(mediumArmorImage);
+        }
+        if(warrior.getArmor()!=null &&warrior.getArmor().getName().equals("Heavy Armor")) {
+            setStats();
+            Image heavyArmorImage = new Image(getClass().getResource("/WarriorAssets/heavyarmor.jpg").toExternalForm());
+            armorView.setImage(heavyArmorImage);
+        }
+        if(warrior.getWeapon()!=null &&warrior.getWeapon().getName().equals("Dagger")) {
+            setStats();
+            Image daggerImage = new Image(getClass().getResource("/WarriorAssets/Dagger.jpg").toExternalForm());
+            weaponView.setImage(daggerImage);
+        }
+        if(warrior.getWeapon()!=null &&warrior.getWeapon().getName().equals("Sword")) {
+            setStats();
+            Image swordImage = new Image(getClass().getResource("/WarriorAssets/Sword.jpg").toExternalForm());
+            weaponView.setImage(swordImage);
+        }
+        if(warrior.getWeapon()!=null &&warrior.getWeapon().getName().equals("Battleaxe")) {
+            setStats();
+            Image axeImage = new Image(getClass().getResource("/WarriorAssets/Battleaxer.jpg").toExternalForm());
+            weaponView.setImage(axeImage);
+        }
     }
     public void setStats() {
         hp.setText(""+warrior.getHitPoints());
@@ -161,6 +192,20 @@ public class HelloController {
         setStats();
         Image axeImage = new Image(getClass().getResource("/WarriorAssets/Battleaxer.jpg").toExternalForm());
         weaponView.setImage(axeImage);
+
+    }
+
+
+    public Warrior pickOpponent(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("ChooseOpponent.fxml"));
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
+        stage.setTitle("Opponent Select");
+        stage.setScene(scene);
+        stage.show();
+
+        return warrior;
+
 
     }
 

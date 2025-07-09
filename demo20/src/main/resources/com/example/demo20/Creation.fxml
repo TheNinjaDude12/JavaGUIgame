@@ -115,5 +115,10 @@
          </font>
       </Text>
       <ImageView fx:id="weaponView" fitHeight="279.0" fitWidth="186.0" layoutX="915.0" layoutY="263.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="618.0" layoutY="863.0" mnemonicParsing="false" onAction="#pickOpponent" prefHeight="117.0" prefWidth="368.0" text="NEXT">
+         <font>
+            <Font size="67.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
