@@ -268,7 +268,7 @@ public class Opponent {
                         attack(warrior);
                         break;
                     case 2:         // On turn 2 of the pattern
-                        attack(warrior);
+                        defend();
                         break;
                 }
                 break;
@@ -280,7 +280,7 @@ public class Opponent {
                         attack(warrior);
                         break;
                     case 2:         // Turn 2: Charge for next turn
-                        attack(warrior);
+                        charge();
                         break;
                     case 3:         // Turn 3: Attack (will be charged attack from turn 2)
                         attack(warrior);

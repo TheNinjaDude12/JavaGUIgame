@@ -32,7 +32,7 @@ public class chooseOpponentController {
     @FXML
     ImageView opponentView = new ImageView();
     Image image;
-    static Opponent opponent;
+    public static Opponent opponent;
     Opponent thief = new Opponent("Thief", 150, 20, 20, 40);
     Opponent viking = new Opponent("Viking", 250, 30, 30, 30);
     Opponent minotaur = new Opponent("Minotaur", 350, 40, 40, 20);

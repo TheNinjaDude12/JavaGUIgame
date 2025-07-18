@@ -18,7 +18,7 @@ import java.io.IOException;
 public class chooseEnvironmentController {
 
 
-    Environment environment;
+    public static Environment environment;
     Environment arena = new Environment("Arena");
     Environment swamp = new Environment("Swamp");
     Environment colosseum = new Environment("Colosseum");
@@ -74,6 +74,16 @@ public class chooseEnvironmentController {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
         stage.setTitle("Character Creation");
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    public void nextButton(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("battlePhase.fxml"));
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
+        stage.setTitle("Battle");
         stage.setScene(scene);
         stage.show();
 
