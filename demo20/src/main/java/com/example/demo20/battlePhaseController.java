@@ -20,6 +20,7 @@ public class battlePhaseController {
     Environment environment = chooseEnvironmentController.environment;
     Opponent opponent = chooseOpponentController.opponent;
     public static int faux = 1;
+    public static int gameOver = 0;
     @FXML
     ImageView warriorView;
     @FXML
@@ -49,23 +50,23 @@ public class battlePhaseController {
     Button attackButton;
 
     public void initialize() {
-        Image warriorJPG= new  Image(getClass().getResource("/WarriorAssets/warrior.jpg").toExternalForm());
+        Image warriorJPG = new Image(getClass().getResource("/WarriorAssets/warrior.jpg").toExternalForm());
         warriorView.setImage(warriorJPG);
-        switch(warrior.getArmor().getName()) {
+        switch (warrior.getArmor().getName()) {
             case "Light Armor":
                 Image lightArmorImage = new Image(getClass().getResource("/WarriorAssets/leather.png").toExternalForm());
                 armorView.setImage(lightArmorImage);
-            break;
+                break;
             case "Medium Armor":
                 Image mediumArmorImage = new Image(getClass().getResource("/WarriorAssets/2811d2cdb07721c.png").toExternalForm());
                 armorView.setImage(mediumArmorImage);
-            break;
+                break;
             case "Heavy Armor":
                 Image heavyArmorImage = new Image(getClass().getResource("/WarriorAssets/heavyarmor.jpg").toExternalForm());
                 armorView.setImage(heavyArmorImage);
-            break;
+                break;
         }
-        switch(warrior.getWeapon().getName()) {
+        switch (warrior.getWeapon().getName()) {
             case "Dagger":
                 Image daggerImage = new Image(getClass().getResource("/WarriorAssets/Dagger.jpg").toExternalForm());
                 weaponView.setImage(daggerImage);
@@ -79,7 +80,7 @@ public class battlePhaseController {
                 weaponView.setImage(axeImage);
                 break;
         }
-        switch(opponent.getName()) {
+        switch (opponent.getName()) {
             case "Thief":
                 Image image = new Image(getClass().getResource("/OpponentAssets/thief.png").toExternalForm());
                 opponentView.setImage(image);
@@ -103,22 +104,105 @@ public class battlePhaseController {
         opponentSpeed.setText("" + opponent.getSpeed());
 
 
-
-
     }
 
-    public void warriorAttack(ActionEvent e) {
-        if(warrior.getSpeed() > opponent.getSpeed() && !opponent.getName().equals("Viking")) {
+    public void warriorAttack(ActionEvent e) throws IOException {
+        if (warrior.getSpeed() > opponent.getSpeed()) {
             warrior.attack(opponent);
             opponent.think(warrior, faux);
 
-        } else if (warrior.getSpeed() < opponent.getSpeed() && !opponent.getName().equals("Viking")) {
-            opponent.think(warrior,faux);
+        } else if (warrior.getSpeed() < opponent.getSpeed()) {
+            opponent.think(warrior, faux);
             warrior.attack(opponent);
         }
 
         opponentHP.setText("" + opponent.getHitPoints());
         warriorHP.setText("" + warrior.getHitPoints());
-        faux++;
+        if (opponent.getHitPoints() > 0 && warrior.getHitPoints() > 0) {
+            if (faux < 3) {
+                faux++;
+            } else {
+                faux = 1;
+            }
+        } else {
+            if (opponent.getHitPoints() <= 0 && warrior.getHitPoints() <= 0) {
+                gameOver = 1;
+            } else if (opponent.getHitPoints() <= 0) {
+                gameOver = 2;
+            } else {
+                gameOver = 0;
+            }
+            checkWin(gameOver, e);
+        }
+    }
+
+    public void warriorDefend(ActionEvent e) throws IOException {
+        warrior.defend();
+        opponent.think(warrior, faux);
+
+        opponentHP.setText("" + opponent.getHitPoints());
+        warriorHP.setText("" + warrior.getHitPoints());
+        if (opponent.getHitPoints() > 0 && warrior.getHitPoints() > 0) {
+            if (faux < 3) {
+                faux++;
+            } else {
+                faux = 1;
+            }
+        } else {
+            if (opponent.getHitPoints() <= 0 && warrior.getHitPoints() <= 0) {
+                gameOver = 1;
+            } else if (opponent.getHitPoints() <= 0) {
+                gameOver = 2;
+            } else {
+                gameOver = 0;
+            }
+            checkWin(gameOver, e);
+        }
+    }
+
+    public void warriorCharge(ActionEvent e) throws IOException {
+        if (!warrior.isCharging()) {
+            if (warrior.getSpeed() > opponent.getSpeed()) {
+                warrior.charge();
+                opponent.think(warrior, faux);
+
+            } else if (warrior.getSpeed() < opponent.getSpeed()) {
+                opponent.think(warrior, faux);
+                warrior.charge();
+            }
+
+
+            opponentHP.setText("" + opponent.getHitPoints());
+            warriorHP.setText("" + warrior.getHitPoints());
+
+            if (opponent.getHitPoints() > 0 && warrior.getHitPoints() > 0) {
+                if (faux < 3) {
+                    faux++;
+                } else {
+                    faux = 1;
+                }
+            } else {
+                if (opponent.getHitPoints() <= 0 && warrior.getHitPoints() <= 0) {
+                    gameOver = 1;
+                } else if (opponent.getHitPoints() <= 0) {
+                    gameOver = 2;
+                } else {
+                    gameOver = 0;
+                }
+                checkWin(gameOver, e);
+            }
+        } else {
+            System.out.println("Already charging.\n");
+        }
+    }
+
+    public void checkWin(int gameOver, ActionEvent e) throws IOException {
+        if (gameOver == 1) {
+            //insert tie
+        } else if (gameOver == 2) {
+            //insert win
+        } else {
+            //insert lose
+        }
     }
 }
