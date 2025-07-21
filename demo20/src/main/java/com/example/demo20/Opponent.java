@@ -6,7 +6,7 @@ import java.util.Random;
  * Represents an opponent in a combat scenario with attributes such as name, hit points, attack, defense, and speed.
  * The opponent can perform different combat actions such as attacking, defending, or charging.
  */
-public class Opponent {
+public abstract class Opponent {
 
 
     // Opponent statistics
@@ -212,6 +212,7 @@ public class Opponent {
      */
     public void charge() {
         isCharging = true;
+        System.out.println("ENEMY IS CHARGING!!!");
         //Charge effects for Magician Enemy
         if(name.equals("Magician")) {
             Random r = new Random();
@@ -254,54 +255,6 @@ public class Opponent {
      * @param warrior The warrior involved in the combat.
      * @param faux A value representing the current turn in the pattern (used for AI decision-making).
      */
-    public void think(Warrior warrior, int faux) {
-        switch(getName()) {
-            case "Thief":
-                // Thief AI: Always attacks (aggressive glass cannon strategy)
-                attack(warrior);
-                break;
+    public abstract void think(Warrior warrior, int faux);
 
-            case "Viking":
-                // Viking AI: Alternates between attacking and defending
-                switch (faux) {
-                    case 1, 3:      // On turns 1 and 3 of the pattern
-                        attack(warrior);
-                        break;
-                    case 2:         // On turn 2 of the pattern
-                        defend();
-                        break;
-                }
-                break;
-
-            case "Minotaur":
-                // Minotaur AI: Attack, charge, attack pattern (uses charge for big damage)
-                switch (faux) {
-                    case 1:         // Turn 1: Attack
-                        attack(warrior);
-                        break;
-                    case 2:         // Turn 2: Charge for next turn
-                        charge();
-                        break;
-                    case 3:         // Turn 3: Attack (will be charged attack from turn 2)
-                        attack(warrior);
-                        break;
-                }
-                break;
-            case "Magician":
-                // Minotaur AI: Attack, charge, attack pattern (uses charge for big damage)
-                switch (faux) {
-                    case 1:         // Turn 1: Attack
-                        attack(warrior);
-                        break;
-                    case 2:         // Turn 2: Charge for next turn
-                        System.out.println("MAGICIAN IS CHARGING!!!");
-                        charge();
-                        break;
-                    case 3:         // Turn 3: Attack (will be charged attack from turn 2)
-                        attack(warrior);
-                        break;
-                }
-                break;
-        }
-    }
 }

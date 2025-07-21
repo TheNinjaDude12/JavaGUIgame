@@ -33,9 +33,9 @@ public class chooseOpponentController {
     ImageView opponentView = new ImageView();
     Image image;
     public static Opponent opponent;
-    Opponent thief = new Opponent("Thief", 150, 20, 20, 40);
-    Opponent viking = new Opponent("Viking", 250, 30, 30, 30);
-    Opponent minotaur = new Opponent("Minotaur", 350, 40, 40, 20);
+    Opponent thief = new Thief();
+    Opponent viking = new Viking();
+    Opponent minotaur = new Minotaur();
 
     public void initialize() {
         if(opponent!=null && opponent.getName().equals("Thief")) {
