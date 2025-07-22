@@ -12,7 +12,7 @@
    <children>
       <ImageView fitHeight="1080.0" fitWidth="1920.0">
          <image>
-            <Image url="@../../../background.jpg" />
+            <Image url="@../../../background.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="700.0" fitWidth="640.0" layoutX="479.0" layoutY="115.0">
@@ -20,11 +20,6 @@
             <Image url="@../../../WarriorAssets/warrior.jpg" />
          </image>
       </ImageView>
-      <Text layoutX="111.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stats" wrappingWidth="286.13671875">
-         <font>
-            <Font size="88.0" />
-         </font>
-      </Text>
       <VBox layoutX="149.0" layoutY="201.0" prefHeight="408.0" prefWidth="115.0">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="HP" wrappingWidth="184.13671875">
@@ -73,26 +68,21 @@
             </Text>
          </children>
       </VBox>
-      <Button fx:id="lightArmorButton" layoutX="1182.0" layoutY="231.0" mnemonicParsing="false" onAction="#wearLightArmor" prefHeight="133.0" prefWidth="222.0" text="Light">
+      <Button fx:id="lightArmorButton" layoutX="986.0" layoutY="238.0" mnemonicParsing="false" onAction="#wearLightArmor" prefHeight="133.0" prefWidth="222.0" text="Light">
          <font>
             <Font size="41.0" />
          </font>
       </Button>
-      <Button fx:id="mediumArmorButton" layoutX="1182.0" layoutY="415.0" mnemonicParsing="false" onAction="#wearMediumArmor" prefHeight="133.0" prefWidth="222.0" text="Medium">
+      <Button fx:id="mediumArmorButton" layoutX="990.0" layoutY="405.0" mnemonicParsing="false" onAction="#wearMediumArmor" prefHeight="133.0" prefWidth="222.0" text="Medium">
          <font>
             <Font size="42.0" />
          </font>
       </Button>
-      <Button fx:id="heavyArmorButton" layoutX="1182.0" layoutY="616.0" mnemonicParsing="false" onAction="#wearHeavyArmor" prefHeight="133.0" prefWidth="222.0" text="Heavy">
+      <Button fx:id="heavyArmorButton" layoutX="990.0" layoutY="592.0" mnemonicParsing="false" onAction="#wearHeavyArmor" prefHeight="133.0" prefWidth="222.0" text="Heavy">
          <font>
             <Font size="48.0" />
          </font>
       </Button>
-      <Text layoutX="1172.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Armor" wrappingWidth="286.13671875">
-         <font>
-            <Font size="88.0" />
-         </font>
-      </Text>
       <ImageView fx:id="armorView" fitHeight="233.0" fitWidth="240.0" layoutX="665.0" layoutY="304.0" pickOnBounds="true" preserveRatio="true" />
       <Button layoutX="1502.0" layoutY="234.0" mnemonicParsing="false" onAction="#useDagger" prefHeight="133.0" prefWidth="222.0" text="Dagger">
          <font>
@@ -104,21 +94,31 @@
             <Font size="42.0" />
          </font>
       </Button>
-      <Button fx:id="heavyArmorButton1" layoutX="1502.0" layoutY="619.0" mnemonicParsing="false" onAction="#useAxe" prefHeight="133.0" prefWidth="222.0" text="Axe">
+      <Button fx:id="heavyArmorButton1" layoutX="1502.0" layoutY="592.0" mnemonicParsing="false" onAction="#useAxe" prefHeight="133.0" prefWidth="222.0" text="Axe">
          <font>
             <Font size="48.0" />
          </font>
       </Button>
-      <Text layoutX="1492.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Weapon" wrappingWidth="286.13671875">
-         <font>
-            <Font size="62.0" />
-         </font>
-      </Text>
-      <ImageView fx:id="weaponView" fitHeight="279.0" fitWidth="186.0" layoutX="915.0" layoutY="263.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="weaponView" fitHeight="279.0" fitWidth="186.0" layoutX="1052.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true" />
       <Button layoutX="618.0" layoutY="863.0" mnemonicParsing="false" onAction="#pickOpponent" prefHeight="117.0" prefWidth="368.0" text="NEXT">
          <font>
             <Font size="67.0" />
          </font>
       </Button>
+      <ImageView fitHeight="117.0" fitWidth="549.0" layoutX="7.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Stats.PNG" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="96.0" fitWidth="443.0" layoutX="916.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../GameAssets/ArmorText.PNG" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="96.0" fitWidth="443.0" layoutX="1456.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../GameAssets/Weapon.PNG" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

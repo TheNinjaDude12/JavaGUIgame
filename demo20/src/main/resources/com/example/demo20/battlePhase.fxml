@@ -147,9 +147,9 @@
          </font>
       </Text>
       <ImageView fx:id="warriorView" fitHeight="346.0" fitWidth="523.0" layoutX="133.0" layoutY="371.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="attackButton" layoutX="147.0" layoutY="740.0" mnemonicParsing="false" onAction="#warriorAttack" prefHeight="58.0" prefWidth="141.0" text="Button" />
-      <Button layoutX="144.0" layoutY="830.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="141.0" text="Button" />
-      <Button layoutX="339.0" layoutY="742.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="141.0" text="Button" />
+      <Button fx:id="attackButton" layoutX="147.0" layoutY="740.0" mnemonicParsing="false" onAction="#warriorAttack" prefHeight="58.0" prefWidth="141.0" text="Attack" />
+      <Button layoutX="144.0" layoutY="830.0" mnemonicParsing="false" onAction="#warriorCharge" prefHeight="58.0" prefWidth="141.0" text="Charge" />
+      <Button layoutX="339.0" layoutY="742.0" mnemonicParsing="false" onAction="#warriorDefend" prefHeight="58.0" prefWidth="141.0" text="Defend" />
       <Button layoutX="340.0" layoutY="838.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="141.0" text="Button" />
       <ImageView fx:id="opponentView" fitHeight="346.0" fitWidth="523.0" layoutX="1014.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="armorView" fitHeight="190.0" fitWidth="186.0" layoutX="247.0" layoutY="449.0" pickOnBounds="true" preserveRatio="true" />

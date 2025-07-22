@@ -8,11 +8,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo20.chooseOpponentController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17.0.16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo20.chooseOpponentController">
    <children>
       <ImageView fitHeight="1080.0" fitWidth="1920.0">
          <image>
-            <Image url="@../../../background.jpg" />
+            <Image url="@../../../../../../../../../Downloads/tester/src/main/resources/background.jpg" />
          </image>
       </ImageView>
       <Text layoutX="141.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stats" wrappingWidth="286.13671875">

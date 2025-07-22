@@ -94,6 +94,7 @@ public class battlePhaseController {
                 opponentView.setImage(image);
                 break;
         }
+        environment.environmentEffects(warrior, opponent);
         warriorHP.setText("" + warrior.getHitPoints());
         warriorDefense.setText("" + warrior.getDefense());
         warriorAttack.setText("" + warrior.getAttack());
@@ -108,13 +109,23 @@ public class battlePhaseController {
 
     public void warriorAttack(ActionEvent e) throws IOException {
         if (warrior.getSpeed() > opponent.getSpeed()) {
-            warrior.attack(opponent);
-            opponent.think(warrior, faux);
+            if(opponent.getName().equals("Viking") && faux==2){
+                opponent.think(warrior, faux);
+                warrior.attack(opponent);
+
+            }
+            else{
+                warrior.attack(opponent);
+                opponent.think(warrior,faux);
+            }
+
+
 
         } else if (warrior.getSpeed() < opponent.getSpeed()) {
             opponent.think(warrior, faux);
             warrior.attack(opponent);
         }
+
 
         opponentHP.setText("" + opponent.getHitPoints());
         warriorHP.setText("" + warrior.getHitPoints());
@@ -134,6 +145,7 @@ public class battlePhaseController {
             }
             checkWin(gameOver, e);
         }
+
     }
 
     public void warriorDefend(ActionEvent e) throws IOException {
@@ -198,10 +210,33 @@ public class battlePhaseController {
 
     public void checkWin(int gameOver, ActionEvent e) throws IOException {
         if (gameOver == 1) {
-            //insert tie
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("start.fxml"));
+            Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+            Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
+            String css = getClass().getResource("Bro.css").toExternalForm();
+            scene.getStylesheets().add(css);
+            stage.setTitle("Hello!");
+            stage.setScene(scene);
+            stage.show();
         } else if (gameOver == 2) {
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("start.fxml"));
+            Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+            Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
+            String css = getClass().getResource("Bro.css").toExternalForm();
+            scene.getStylesheets().add(css);
+            stage.setTitle("Hello!");
+            stage.setScene(scene);
+            stage.show();
             //insert win
         } else {
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("start.fxml"));
+            Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+            Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
+            String css = getClass().getResource("Bro.css").toExternalForm();
+            scene.getStylesheets().add(css);
+            stage.setTitle("Hello!");
+            stage.setScene(scene);
+            stage.show();
             //insert lose
         }
     }
