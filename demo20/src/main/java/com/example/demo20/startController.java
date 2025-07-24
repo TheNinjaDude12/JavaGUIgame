@@ -50,6 +50,24 @@ public class startController {
     public void startButtonEnter(MouseEvent e) {
         Image hoverImage = new Image(getClass().getResource("/GameAssets/startHover.png").toExternalForm());
         startView.setImage(hoverImage);
+
+
+        try {
+            URL soundURL = getClass().getResource("/GameAssets/Music/select.wav");
+            if (soundURL == null) {
+                System.out.println("Audio file not found!");
+                return;
+            }
+
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundURL);
+            clip = AudioSystem.getClip();
+            clip.open(audioIn);
+            clip.start();
+
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void startButtonExit(MouseEvent e) {   // Changed to MouseEvent
@@ -59,11 +77,49 @@ public class startController {
     public void exitButtonEnter(MouseEvent e) {
         Image hoverImage = new Image(getClass().getResource("/GameAssets/ExitHover.png").toExternalForm());
         exitView.setImage(hoverImage);
+
+        try {
+            URL soundURL = getClass().getResource("/GameAssets/Music/select.wav");
+            if (soundURL == null) {
+                System.out.println("Audio file not found!");
+                return;
+            }
+
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundURL);
+            clip = AudioSystem.getClip();
+            clip.open(audioIn);
+            clip.start();
+
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void exitButtonExit(MouseEvent e) {   // Changed to MouseEvent
         Image normalImage = new Image(getClass().getResource("/GameAssets/Exit.png").toExternalForm());
         exitView.setImage(normalImage);
+
+    }
+
+    public void confirmSelect(MouseEvent e) {   // Changed to MouseEvent
+        try {
+            URL soundURL = getClass().getResource("/GameAssets/Music/confirm.wav");
+            if (soundURL == null) {
+                System.out.println("Audio file not found!");
+                return;
+            }
+
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundURL);
+            clip = AudioSystem.getClip();
+            clip.open(audioIn);
+            clip.start();
+
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        System.out.println("");
 
     }
 

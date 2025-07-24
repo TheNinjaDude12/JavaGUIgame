@@ -293,6 +293,13 @@ public class Warrior {
         return true;
     }
 
+    public boolean isDefendedLastTurn() {
+        if (defendedLastTurn) {
+            return true; // Already charging
+        }
+        return false;
+    }
+
     /**
      * Executes weapon-specific abilities based on the currently equipped weapon and battle conditions.
      *

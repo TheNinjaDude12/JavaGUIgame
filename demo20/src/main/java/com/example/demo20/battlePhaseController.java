@@ -48,6 +48,7 @@ public class battlePhaseController {
 
     @FXML
     Button attackButton;
+     int armorValue = warrior.getDefense();
 
     public void initialize() {
         Image warriorJPG = new Image(getClass().getResource("/WarriorAssets/warrior.jpg").toExternalForm());
@@ -150,6 +151,9 @@ public class battlePhaseController {
 
     public void warriorDefend(ActionEvent e) throws IOException {
         warrior.defend();
+        if(warrior.getWeapon().getName().equals("Dagger")) {
+
+        }
         opponent.think(warrior, faux);
 
         opponentHP.setText("" + opponent.getHitPoints());
@@ -170,6 +174,8 @@ public class battlePhaseController {
             }
             checkWin(gameOver, e);
         }
+        warrior.setDefense(armorValue);
+        warrior.setDefending(false);
     }
 
     public void warriorCharge(ActionEvent e) throws IOException {

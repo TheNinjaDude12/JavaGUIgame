@@ -3,10 +3,15 @@ package com.example.demo20;
  * Represents a weapon with attributes such as name, attack value, and speed penalty.
  * A weapon can be equipped by a warrior to modify their combat statistics.
  */
-public class Weapon {
+abstract public class Weapon {
     /**
      * The name of the weapon (e.g., "Sword", "Dagger", "Axe").
      */
+
+    public void weapon_ability(Warrior warrior){
+
+    }
+
     private String name;           // Display name of the weapon
     
     /**
@@ -58,6 +63,9 @@ public class Weapon {
     public String getName() {
         return name;
     }
+
+
+
 
 
 }

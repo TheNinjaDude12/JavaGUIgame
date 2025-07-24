@@ -15,9 +15,7 @@ import java.io.IOException;
 
 public class warriorController {
     static Warrior warrior = new Warrior();
-    Weapon dagger = new Weapon("Dagger", 20, 0);
-    Weapon sword = new Weapon("Sword", 30, 10);
-    Weapon battleaxe = new Weapon("Battleaxe", 40, 20);
+    Dagger dagger = new Dagger();
     Armor lightArmor = new Armor("Light Armor", 20, 5);
     Armor mediumArmor = new Armor("Medium Armor", 30, 15);
     Armor heavyArmor = new Armor("Heavy Armor", 40, 25);
@@ -161,7 +159,7 @@ public class warriorController {
         else {
             warrior.setSpeed(50);
         }
-        warrior.equip(sword);
+
         setStats();
         Image swordImage = new Image(getClass().getResource("/WarriorAssets/Sword.jpg").toExternalForm());
         weaponView.setImage(swordImage);
@@ -176,7 +174,7 @@ public class warriorController {
         else {
             warrior.setSpeed(50);
         }
-        warrior.equip(battleaxe);
+
         setStats();
         Image axeImage = new Image(getClass().getResource("/WarriorAssets/Battleaxer.jpg").toExternalForm());
         weaponView.setImage(axeImage);
