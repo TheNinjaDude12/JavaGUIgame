@@ -13,7 +13,7 @@
             <Image url="@/background.png" />
          </image>
       </ImageView>
-      <Button fx:id="startButton" contentDisplay="GRAPHIC_ONLY" layoutX="556.0" layoutY="323.0" mnemonicParsing="false" onAction="#startGame" onMouseEntered="#startButtonEnter" onMouseExited="#startButtonExit" prefHeight="201.0" prefWidth="841.0">
+      <Button fx:id="startButton" contentDisplay="GRAPHIC_ONLY" layoutX="556.0" layoutY="323.0" mnemonicParsing="false" onAction="#startGame" onMouseEntered="#startButtonEnter" onMouseExited="#startButtonExit" onMousePressed="#confirmSelect" prefHeight="201.0" prefWidth="841.0">
          <font>
             <Font size="96.0" />
          </font>
@@ -24,7 +24,7 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <Button layoutX="556.0" layoutY="709.0" mnemonicParsing="false" onAction="#exitGame" onMouseEntered="#exitButtonEnter" onMouseExited="#exitButtonExit" prefHeight="201.0" prefWidth="841.0">
+      <Button layoutX="556.0" layoutY="709.0" mnemonicParsing="false" onAction="#exitGame" onMouseEntered="#exitButtonEnter" onMouseExited="#exitButtonExit" onMousePressed="#confirmSelect" prefHeight="201.0" prefWidth="841.0">
          <font>
             <Font size="96.0" />
          </font>
