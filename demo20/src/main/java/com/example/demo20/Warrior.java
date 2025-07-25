@@ -243,10 +243,6 @@ public class Warrior {
             damage = (getAttack() * 3 - opponent.getDefense());     // Triple damage minus opponent's defense
             isCharging = false;// Reset charging state after use
 
-        } else if(weapon.getName().equals("Sword") && !isCharging) {
-                System.out.println("Sword ability activated: +10 attack!");
-                damage = (getAttack() + 10 - opponent.getDefense());
-
         }
         else {
             damage = (getAttack() - opponent.getDefense());         // Normal damage calculation
@@ -254,7 +250,7 @@ public class Warrior {
 
         // Check if opponent is defending (halves damage)
         if (opponent.isDefending()) {
-            damage = damage / 2;                                      // Defending reduces damage by half
+            damage = (damage + opponent.getDefense())/2 - opponent.getDefense();       // Defending reduces damage by half
             opponent.setDefending(false);                           // Reset opponent's defending state
         }
 
@@ -272,9 +268,6 @@ public class Warrior {
      */
     public void defend() {
         isDefending = true;
-        if(defendedLastTurn && weapon.getName() == "Dagger") {
-            defense += 10000;
-        }
         defendedLastTurn = !defendedLastTurn;
         System.out.println("WARRIOR IS DEFENDING!!!");
     }
@@ -300,12 +293,13 @@ public class Warrior {
         return false;
     }
 
-    /**
+    /*
      * Executes weapon-specific abilities based on the currently equipped weapon and battle conditions.
      *
-     * @param opponent The opponent in combat.
      */
-    public void weaponAbility(Opponent opponent) {
+
+    /*
+    public void weapon_ability(Warrior warrior) {
         if (weapon == null) {
             return; // No weapon equipped
         }
@@ -367,5 +361,5 @@ public class Warrior {
                         break;
                 }
         }
-    }
+    } **/
 }

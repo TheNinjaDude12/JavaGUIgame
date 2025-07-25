@@ -13,6 +13,7 @@ public class Viking extends Opponent{
                 break;
             case 2:         // On turn 2 of the pattern
                 defend();
+                System.out.println("VIKING IS DEFENDING!!!");
                 break;
         }
     }

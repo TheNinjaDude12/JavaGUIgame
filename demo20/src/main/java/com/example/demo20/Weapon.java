@@ -3,22 +3,20 @@ package com.example.demo20;
  * Represents a weapon with attributes such as name, attack value, and speed penalty.
  * A weapon can be equipped by a warrior to modify their combat statistics.
  */
-abstract public class Weapon {
+public abstract class Weapon {
     /**
      * The name of the weapon (e.g., "Sword", "Dagger", "Axe").
      */
 
-    public void weapon_ability(Warrior warrior){
-
-    }
+    public abstract void weapon_ability(Warrior warrior);
 
     private String name;           // Display name of the weapon
-    
+
     /**
      * The attack value provided by this weapon.
      */
     private int attack;            // Attack value provided by this weapon
-    
+
     /**
      * The speed penalty caused by wielding this weapon.
      */
@@ -27,8 +25,8 @@ abstract public class Weapon {
     /**
      * Constructs a Weapon object with the specified name, attack value, and speed penalty.
      *
-     * @param name The name of the weapon.
-     * @param attack The attack value provided by the weapon.
+     * @param name         The name of the weapon.
+     * @param attack       The attack value provided by the weapon.
      * @param speedPenalty The speed penalty caused by wielding the weapon.
      */
     public Weapon(String name, int attack, int speedPenalty) {
@@ -63,9 +61,5 @@ abstract public class Weapon {
     public String getName() {
         return name;
     }
-
-
-
-
-
 }
+

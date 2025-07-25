@@ -181,7 +181,7 @@ public abstract class Opponent {
 
         // Check if warrior is defending (halves damage)
         if(warrior.isDefending()) {
-            damage = (getAttack()/2 - warrior.getDefense()); //Damage divided by 2 then reduced
+            damage = (damage + warrior.getDefense())/2 - warrior.getDefense();    //Damage divided by 2 then reduced
             warrior.setDefending(false);                            // Reset warrior's defending state
         }
 
