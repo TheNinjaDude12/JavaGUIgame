@@ -1,5 +1,7 @@
 package com.example.demo20;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,8 +13,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.io.IOException;
+import java.net.URL;
 
 public class battlePhaseController {
 
@@ -21,6 +28,7 @@ public class battlePhaseController {
     Opponent opponent = chooseOpponentController.opponent;
     public static int faux = 1;
     public static int gameOver = 0;
+
     @FXML
     ImageView warriorView;
     @FXML
@@ -45,14 +53,44 @@ public class battlePhaseController {
     Text opponentAttack;
     @FXML
     Text opponentSpeed;
-
     @FXML
     Button attackButton;
-     int armorValue = warrior.getDefense();
+
+    int armorValue = warrior.getDefense();
+    Clip clip = startController.clip;
+
+    // Animation variables for Viking/Olaf
+    private Timeline vikingAnimation;
+    private Image olafImage1;
+    private Image olafImage2;
+    private boolean showingFirstImage = true;
 
     public void initialize() {
+        if (startController.clip != null) {
+            startController.clip.stop();
+            startController.clip.flush();
+            startController.clip.close();
+            startController.clip = null;  // release reference
+        }
+
+        try {
+            URL soundURL = getClass().getResource("/GameAssets/Music/baldursgate.wav");
+            if (soundURL == null) {
+                System.out.println("Audio file not found!");
+                return;
+            }
+
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundURL);
+            startController.clip = AudioSystem.getClip();
+            startController.clip.open(audioIn);
+            startController.clip.loop(Clip.LOOP_CONTINUOUSLY);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         Image warriorJPG = new Image(getClass().getResource("/WarriorAssets/warrior.jpg").toExternalForm());
         warriorView.setImage(warriorJPG);
+
         switch (warrior.getArmor().getName()) {
             case "Light Armor":
                 Image lightArmorImage = new Image(getClass().getResource("/WarriorAssets/leather.png").toExternalForm());
@@ -67,6 +105,7 @@ public class battlePhaseController {
                 armorView.setImage(heavyArmorImage);
                 break;
         }
+
         switch (warrior.getWeapon().getName()) {
             case "Dagger":
                 Image daggerImage = new Image(getClass().getResource("/WarriorAssets/Dagger.jpg").toExternalForm());
@@ -81,20 +120,29 @@ public class battlePhaseController {
                 weaponView.setImage(axeImage);
                 break;
         }
+
         switch (opponent.getName()) {
             case "Thief":
                 Image image = new Image(getClass().getResource("/OpponentAssets/thief.png").toExternalForm());
                 opponentView.setImage(image);
                 break;
             case "Viking":
-                image = new Image(getClass().getResource("/OpponentAssets/viking.jpg").toExternalForm());
-                opponentView.setImage(image);
+                // Load both Olaf images
+                olafImage1 = new Image(getClass().getResource("/OpponentAssets/olaf1.png").toExternalForm());
+                olafImage2 = new Image(getClass().getResource("/OpponentAssets/olaf2.png").toExternalForm());
+
+                // Set initial image
+                opponentView.setImage(olafImage1);
+
+                // Create and start the animation
+                startVikingIdleAnimation();
                 break;
             case "Minotaur":
                 image = new Image(getClass().getResource("/OpponentAssets/minotaur.png").toExternalForm());
                 opponentView.setImage(image);
                 break;
         }
+
         environment.environmentEffects(warrior, opponent);
         warriorHP.setText("" + warrior.getHitPoints());
         warriorDefense.setText("" + warrior.getDefense());
@@ -104,8 +152,34 @@ public class battlePhaseController {
         opponentDefense.setText("" + opponent.getDefense());
         opponentAttack.setText("" + opponent.getAttack());
         opponentSpeed.setText("" + opponent.getSpeed());
+    }
 
+    private void startVikingIdleAnimation() {
+        // Create a timeline that switches images every 1.5 seconds (adjust as needed)
+        vikingAnimation = new Timeline(
+                new KeyFrame(Duration.seconds(1.5), e -> {
+                    if (showingFirstImage) {
+                        opponentView.setImage(olafImage2);
+                        showingFirstImage = false;
+                    } else {
+                        opponentView.setImage(olafImage1);
+                        showingFirstImage = true;
+                    }
+                })
+        );
 
+        // Set the animation to repeat indefinitely
+        vikingAnimation.setCycleCount(Timeline.INDEFINITE);
+
+        // Start the animation
+        vikingAnimation.play();
+    }
+
+    // Add this method to stop the animation when the battle ends or controller is destroyed
+    public void stopVikingAnimation() {
+        if (vikingAnimation != null) {
+            vikingAnimation.stop();
+        }
     }
 
     public void warriorAttack(ActionEvent e) throws IOException {
@@ -113,20 +187,15 @@ public class battlePhaseController {
             if(opponent.getName().equals("Viking") && faux==2){
                 opponent.think(warrior, faux);
                 warrior.attack(opponent);
-
             }
             else{
                 warrior.attack(opponent);
                 opponent.think(warrior,faux);
             }
-
-
-
         } else if (warrior.getSpeed() < opponent.getSpeed()) {
             opponent.think(warrior, faux);
             warrior.attack(opponent);
         }
-
 
         opponentHP.setText("" + opponent.getHitPoints());
         warriorHP.setText("" + warrior.getHitPoints());
@@ -146,7 +215,6 @@ public class battlePhaseController {
             }
             checkWin(gameOver, e);
         }
-
     }
 
     public void warriorDefend(ActionEvent e) throws IOException {
@@ -183,12 +251,10 @@ public class battlePhaseController {
             if (warrior.getSpeed() > opponent.getSpeed()) {
                 warrior.charge();
                 opponent.think(warrior, faux);
-
             } else if (warrior.getSpeed() < opponent.getSpeed()) {
                 opponent.think(warrior, faux);
                 warrior.charge();
             }
-
 
             opponentHP.setText("" + opponent.getHitPoints());
             warriorHP.setText("" + warrior.getHitPoints());
@@ -215,6 +281,9 @@ public class battlePhaseController {
     }
 
     public void checkWin(int gameOver, ActionEvent e) throws IOException {
+        // Stop the Viking animation when battle ends
+        stopVikingAnimation();
+
         if (gameOver == 1) {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("start.fxml"));
             Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
