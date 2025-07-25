@@ -158,7 +158,6 @@ public class battlePhaseController {
         warrior.defend();
         weapon.weapon_ability(warrior);
         opponent.think(warrior, faux);
-        System.out.println(warrior.getDefense() + "defense");
 
         opponentHP.setText("" + opponent.getHitPoints());
         warriorHP.setText("" + warrior.getHitPoints());
