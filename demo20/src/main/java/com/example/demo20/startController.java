@@ -48,7 +48,7 @@ public class startController {
         }
     }
     public void startButtonEnter(MouseEvent e) {
-        Image hoverImage = new Image(getClass().getResource("/GameAssets/startHover.png").toExternalForm());
+        Image hoverImage = new Image(getClass().getResource("/GameAssets/Hover.png").toExternalForm());
         startView.setImage(hoverImage);
 
 
@@ -75,7 +75,7 @@ public class startController {
         startView.setImage(normalImage);
     }
     public void exitButtonEnter(MouseEvent e) {
-        Image hoverImage = new Image(getClass().getResource("/GameAssets/ExitHover.png").toExternalForm());
+        Image hoverImage = new Image(getClass().getResource("/GameAssets/Hover.png").toExternalForm());
         exitView.setImage(hoverImage);
 
         try {
@@ -125,9 +125,13 @@ public class startController {
 
 
     public void startGame(ActionEvent event) throws IOException {
+
+
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Creation.fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
+        String css = getClass().getResource("Bro.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.setTitle("Character Creation");
         stage.setScene(scene);
         stage.show();

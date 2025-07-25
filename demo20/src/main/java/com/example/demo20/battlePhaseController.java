@@ -17,10 +17,8 @@ import java.io.IOException;
 public class battlePhaseController {
 
     Warrior warrior = warriorController.warrior;
-    Weapon weapon = warrior.getWeapon();
     Environment environment = chooseEnvironmentController.environment;
     Opponent opponent = chooseOpponentController.opponent;
-
     public static int faux = 1;
     public static int gameOver = 0;
     @FXML
@@ -112,14 +110,12 @@ public class battlePhaseController {
 
     public void warriorAttack(ActionEvent e) throws IOException {
         if (warrior.getSpeed() > opponent.getSpeed()) {
-            if(opponent.getName().equals("Viking") && faux == 2){
+            if(opponent.getName().equals("Viking") && faux==2){
                 opponent.think(warrior, faux);
-                weapon.weapon_ability(warrior);
                 warrior.attack(opponent);
 
             }
             else{
-                weapon.weapon_ability(warrior);
                 warrior.attack(opponent);
                 opponent.think(warrior,faux);
             }
@@ -128,7 +124,6 @@ public class battlePhaseController {
 
         } else if (warrior.getSpeed() < opponent.getSpeed()) {
             opponent.think(warrior, faux);
-            weapon.weapon_ability(warrior);
             warrior.attack(opponent);
         }
 
@@ -151,12 +146,14 @@ public class battlePhaseController {
             }
             checkWin(gameOver, e);
         }
-        warrior.setAttack(weapon.getAttack());
+
     }
 
     public void warriorDefend(ActionEvent e) throws IOException {
         warrior.defend();
-        weapon.weapon_ability(warrior);
+        if(warrior.getWeapon().getName().equals("Dagger")) {
+
+        }
         opponent.think(warrior, faux);
 
         opponentHP.setText("" + opponent.getHitPoints());

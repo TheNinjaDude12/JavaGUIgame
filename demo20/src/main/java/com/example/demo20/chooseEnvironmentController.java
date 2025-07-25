@@ -74,6 +74,8 @@ public class chooseEnvironmentController {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
         stage.setTitle("Character Creation");
+        String css = getClass().getResource("Bro.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.setScene(scene);
         stage.show();
 
@@ -83,6 +85,8 @@ public class chooseEnvironmentController {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("battlePhase.fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
+        String css = getClass().getResource("Bro.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.setTitle("Battle");
         stage.setScene(scene);
         stage.show();

@@ -8,28 +8,32 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.io.IOException;
+import java.net.URL;
 
 public class warriorController {
-    public static Weapon weapon;
     static Warrior warrior = new Warrior();
-    Weapon dagger = new Dagger();
-    Weapon Axe = new BattleAxe();
-    Weapon Sword = new Sword();
-    Armor lightArmor = new Armor("Light Armor", 20, 5);
-    Armor mediumArmor = new Armor("Medium Armor", 30, 15);
-    Armor heavyArmor = new Armor("Heavy Armor", 40, 25);
+    private Dagger dagger = new Dagger();
+    private Sword sword = new Sword();
+    private Axe axe = new Axe();
+    private  Armor lightArmor = new Armor("Light Armor", 20, 5);
+    private  Armor mediumArmor = new Armor("Medium Armor", 30, 15);
+    private  Armor heavyArmor = new Armor("Heavy Armor", 40, 25);
     @FXML
-    Text hp = new Text();
+    private  Text hp = new Text();
     @FXML
-    Text def = new Text();
+    private  Text def = new Text();
     @FXML
-    Text atk = new Text();
+    private  Text atk = new Text();
     @FXML
-    Text spd = new Text();
+    private  Text spd = new Text();
     @FXML
     Button lightArmorButton = new Button();
     @FXML
@@ -42,8 +46,26 @@ public class warriorController {
     ImageView armorView = new ImageView();
     @FXML
     ImageView weaponView = new ImageView();
+    @FXML
+    ImageView daggerView = new ImageView();
+    @FXML
+    ImageView swordView = new ImageView();
+    @FXML
+    ImageView axeView = new ImageView();
+    @FXML
+    ImageView lightView = new ImageView();
+    @FXML
+    ImageView mediumView = new ImageView();
+    @FXML
+    ImageView heavyView = new ImageView();
+    @FXML
+    ImageView nextView = new ImageView();
+
+
+    private Clip clip;
 
     public void initialize() {
+
         hp.setText(""+warrior.getHitPoints());
         def.setText(""+warrior.getDefense());
         atk.setText(""+warrior.getAttack());
@@ -147,7 +169,6 @@ public class warriorController {
         else {
             warrior.setSpeed(50);
         }
-        weapon = dagger;
         warrior.equip(dagger);
         setStats();
         Image daggerImage = new Image(getClass().getResource("/WarriorAssets/Dagger.jpg").toExternalForm());
@@ -163,7 +184,7 @@ public class warriorController {
         else {
             warrior.setSpeed(50);
         }
-        warrior.equip(Sword);
+        warrior.equip(sword);
         setStats();
         Image swordImage = new Image(getClass().getResource("/WarriorAssets/Sword.jpg").toExternalForm());
         weaponView.setImage(swordImage);
@@ -178,25 +199,140 @@ public class warriorController {
         else {
             warrior.setSpeed(50);
         }
-        weapon = Axe;
-        warrior.equip(Axe);
+        warrior.equip(axe);
         setStats();
         Image axeImage = new Image(getClass().getResource("/WarriorAssets/Battleaxer.jpg").toExternalForm());
         weaponView.setImage(axeImage);
 
     }
 
+    public void daggerViewEnter(MouseEvent e) {
+        Image hoverImage = new Image(getClass().getResource("/GameAssets/Hover.png").toExternalForm());
+        daggerView.setImage(hoverImage);
+
+        playSelectSound();
+    }
+    public void daggerButtonExit(MouseEvent e) {   // Changed to MouseEvent
+        Image normalImage = new Image(getClass().getResource("/GameAssets/Dagger.png").toExternalForm());
+        daggerView.setImage(normalImage);
+
+    }
+    public void axeViewEnter(MouseEvent e)  {
+        Image hoverImage = new Image(getClass().getResource("/GameAssets/Hover.png").toExternalForm());
+        axeView.setImage(hoverImage);
+        playSelectSound();
+
+
+    }
+    public void axeButtonExit(MouseEvent e) {   // Changed to MouseEvent
+        Image normalImage = new Image(getClass().getResource("/GameAssets/Axe.png").toExternalForm());
+        axeView.setImage(normalImage);
+    }
+    public void lightViewEnter(MouseEvent e)  {
+        Image hoverImage = new Image(getClass().getResource("/GameAssets/Hover.png").toExternalForm());
+        lightView.setImage(hoverImage);
+
+        playSelectSound();
+    }
+    public void swordButtonExit(MouseEvent e) {   // Changed to MouseEvent
+        Image normalImage = new Image(getClass().getResource("/GameAssets/Sword.png").toExternalForm());
+        swordView.setImage(normalImage);
+    }
+    public void swordViewEnter(MouseEvent e)  {
+        Image hoverImage = new Image(getClass().getResource("/GameAssets/Hover.png").toExternalForm());
+        swordView.setImage(hoverImage);
+
+        playSelectSound();
+    }
+    public void lightButtonExit(MouseEvent e) {   // Changed to MouseEvent
+        Image normalImage = new Image(getClass().getResource("/GameAssets/Light.png").toExternalForm());
+        lightView.setImage(normalImage);
+    }
+
+    public void mediumViewEnter(MouseEvent e)  {
+        Image hoverImage = new Image(getClass().getResource("/GameAssets/Hover.png").toExternalForm());
+        mediumView.setImage(hoverImage);
+
+        playSelectSound();
+    }
+    public void mediumButtonExit(MouseEvent e) {   // Changed to MouseEvent
+        Image normalImage = new Image(getClass().getResource("/GameAssets/Medium.png").toExternalForm());
+        mediumView.setImage(normalImage);
+    }
+    public void heavyViewEnter(MouseEvent e)  {
+        Image hoverImage = new Image(getClass().getResource("/GameAssets/Hover.png").toExternalForm());
+        heavyView.setImage(hoverImage);
+
+        playSelectSound();
+    }
+    public void heavyButtonExit(MouseEvent e) {   // Changed to MouseEvent
+        Image normalImage = new Image(getClass().getResource("/GameAssets/Heavy.png").toExternalForm());
+        heavyView.setImage(normalImage);
+    }
+    public void nextViewEnter(MouseEvent e) {
+        Image hoverImage = new Image(getClass().getResource("/GameAssets/Hover.png").toExternalForm());
+        nextView.setImage(hoverImage);
+
+        playSelectSound();
+    }
+    public void nextButtonExit(MouseEvent e) {   // Changed to MouseEvent
+        Image normalImage = new Image(getClass().getResource("/GameAssets/Next.png").toExternalForm());
+        nextView.setImage(normalImage);
+
+    }
+    public void confirmSelect(MouseEvent e) {   // Changed to MouseEvent
+        try {
+            URL soundURL = getClass().getResource("/GameAssets/Music/confirm.wav");
+            if (soundURL == null) {
+                System.out.println("Audio file not found!");
+                return;
+            }
+
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundURL);
+            clip = AudioSystem.getClip();
+            clip.open(audioIn);
+            clip.start();
+
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        System.out.println("");
+
+    }
+
+
 
     public void pickOpponent(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("ChooseOpponent.fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
+        String css = getClass().getResource("Bro.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.setTitle("Opponent Select");
         stage.setScene(scene);
         stage.show();
 
 
-
     }
+    public void playSelectSound() {
+        try {
+            URL soundURL = getClass().getResource("/GameAssets/Music/select.wav");
+            if (soundURL == null) {
+                System.out.println("Audio file not found!");
+                return;
+            }
+
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundURL);
+            clip = AudioSystem.getClip();
+            clip.open(audioIn);
+            clip.start();
+
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
 
 }
