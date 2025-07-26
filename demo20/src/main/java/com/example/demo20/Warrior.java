@@ -268,7 +268,7 @@ public class Warrior {
      */
     public void defend() {
         isDefending = true;
-        defendedLastTurn = !defendedLastTurn;
+        defendedLastTurn = true;
         System.out.println("WARRIOR IS DEFENDING!!!");
     }
 
@@ -291,6 +291,24 @@ public class Warrior {
             return true; // Already charging
         }
         return false;
+    }
+
+    public int getDamageDealt(Opponent opponent) {
+        int damage = 0;
+        if(isCharging && !opponent.isDefending()) {
+            damage = attack * 3 - opponent.getDefense();
+        }
+        else {
+            damage = attack - opponent.getDefense();
+        }
+        if(opponent.isDefending()) {
+            damage = attack/2 - opponent.getDefense() ;
+        }
+        else if (opponent.isDefending() && isCharging) {
+            damage = attack * 3/2 - opponent.getDefense() ;
+
+        }
+        return damage;
     }
 
     /*

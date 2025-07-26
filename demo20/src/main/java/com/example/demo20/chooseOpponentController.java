@@ -230,6 +230,8 @@ public class chooseOpponentController {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("ChooseEnvironment.fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
+        String css = getClass().getResource("Bro.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.setTitle("Choose Environment Creation");
         stage.setScene(scene);
         stage.show();

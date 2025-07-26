@@ -6,6 +6,7 @@ public class Dagger extends Weapon{
     }
     public void weapon_ability(Warrior warrior) {
         if(warrior.isDefendedLastTurn() && warrior.isDefending()) {
+            System.out.println("EVADING");
             warrior.setDefense(warrior.getDefense() + 9999999);
         }
 

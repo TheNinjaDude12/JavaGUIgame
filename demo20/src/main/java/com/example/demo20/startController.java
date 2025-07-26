@@ -29,7 +29,8 @@ public class startController {
 
 
 
-    private Clip clip;
+    public static Clip clip;
+    public Clip sfxClip;
 
     public void initialize() {
         try {
@@ -60,9 +61,9 @@ public class startController {
             }
 
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundURL);
-            clip = AudioSystem.getClip();
-            clip.open(audioIn);
-            clip.start();
+            sfxClip = AudioSystem.getClip();
+            sfxClip.open(audioIn);
+            sfxClip.start();
 
 
         } catch (Exception ex) {
@@ -86,9 +87,9 @@ public class startController {
             }
 
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundURL);
-            clip = AudioSystem.getClip();
-            clip.open(audioIn);
-            clip.start();
+            sfxClip = AudioSystem.getClip();
+            sfxClip.open(audioIn);
+            sfxClip.start();
 
 
         } catch (Exception ex) {
@@ -111,9 +112,9 @@ public class startController {
             }
 
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundURL);
-            clip = AudioSystem.getClip();
-            clip.open(audioIn);
-            clip.start();
+            sfxClip = AudioSystem.getClip();
+            sfxClip.open(audioIn);
+            sfxClip.start();
 
 
         } catch (Exception ex) {
