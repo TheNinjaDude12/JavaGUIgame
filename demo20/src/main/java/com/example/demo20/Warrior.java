@@ -249,9 +249,14 @@ public class Warrior {
         }
 
         // Check if opponent is defending (halves damage)
-        if (opponent.isDefending()) {
-            damage = (damage + opponent.getDefense())/2 - opponent.getDefense();       // Defending reduces damage by half
-            opponent.setDefending(false);                           // Reset opponent's defending state
+        if (opponent.isDefending() && !isCharging) {
+            damage = (attack/2 - opponent.getDefense());       // Defending reduces damage by half
+                   // Reset opponent's defending state
+        }
+        else if(opponent.isDefending() && isCharging) {
+            damage = (getAttack() * 3/2 -  opponent.getDefense());       // Defending reduces damage by half
+
+
         }
 
         // Ensure damage is never negative
@@ -298,15 +303,24 @@ public class Warrior {
         if(isCharging && !opponent.isDefending()) {
             damage = attack * 3 - opponent.getDefense();
         }
-        else {
-            damage = attack - opponent.getDefense();
-        }
-        if(opponent.isDefending()) {
+
+        else if(!isCharging && opponent.isDefending()) {
+            System.out.println("Triggered2");
             damage = attack/2 - opponent.getDefense() ;
+            opponent.setDefending(false);
         }
         else if (opponent.isDefending() && isCharging) {
-            damage = attack * 3/2 - opponent.getDefense() ;
+            System.out.println("Triggered");
+            damage = attack * 3/2 - opponent.getDefense();
+            opponent.setDefending(false);
 
+        }
+        else {
+            System.out.println("normal");
+            damage = attack - opponent.getDefense();
+        }
+        if(damage < 0) {
+            damage = 0;
         }
         return damage;
     }
