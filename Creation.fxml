@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo20.warriorController">
+   <children>
+      <ImageView fitHeight="1096.0" fitWidth="1992.0" layoutX="-71.0" layoutY="-12.0">
+         <image>
+            <Image url="@/armory.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="560.0" fitWidth="592.0" layoutX="400.0" layoutY="203.0" preserveRatio="true">
+         <image>
+            <Image url="@../../../WarriorAssets/idle.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="lightArmorButton" layoutX="1042.0" layoutY="212.0" mnemonicParsing="false" onAction="#wearLightArmor" onMouseClicked="#confirmSelect" onMouseEntered="#lightViewEnter" onMouseExited="#lightButtonExit" prefHeight="126.0" prefWidth="315.0">
+         <font>
+            <Font size="41.0" />
+         </font>
+         <graphic>
+            <ImageView fx:id="lightView" fitHeight="104.0" fitWidth="311.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../GameAssets/Light.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="mediumArmorButton" layoutX="1044.0" layoutY="359.0" mnemonicParsing="false" onAction="#wearMediumArmor" onMouseClicked="#confirmSelect" onMouseEntered="#mediumViewEnter" onMouseExited="#mediumButtonExit" prefHeight="124.0" prefWidth="309.0">
+         <font>
+            <Font size="42.0" />
+         </font>
+         <graphic>
+            <ImageView fx:id="mediumView" fitHeight="102.0" fitWidth="319.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../GameAssets/Medium.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="heavyArmorButton" layoutX="1044.0" layoutY="502.0" mnemonicParsing="false" onAction="#wearHeavyArmor" onMouseClicked="#confirmSelect" onMouseEntered="#heavyViewEnter" onMouseExited="#heavyButtonExit" prefHeight="128.0" prefWidth="331.0">
+         <font>
+            <Font size="48.0" />
+         </font>
+         <graphic>
+            <ImageView fx:id="heavyView" fitHeight="104.0" fitWidth="307.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../GameAssets/Heavy.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="1499.0" layoutY="212.0" mnemonicParsing="false" onAction="#useDagger" onMouseClicked="#confirmSelect" onMouseEntered="#daggerViewEnter" onMouseExited="#daggerButtonExit" prefHeight="114.0" prefWidth="306.0">
+         <font>
+            <Font size="41.0" />
+         </font>
+         <graphic>
+            <ImageView fx:id="daggerView" fitHeight="96.0" fitWidth="313.0" layoutY="212.0" onMouseEntered="#daggerViewEnter" onMouseExited="#daggerButtonExit" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../GameAssets/Dagger.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="mediumArmorButton1" layoutX="1499.0" layoutY="361.0" mnemonicParsing="false" onAction="#useSword" onMouseClicked="#confirmSelect" onMouseEntered="#swordViewEnter" onMouseExited="#swordButtonExit" prefHeight="114.0" prefWidth="339.0">
+         <font>
+            <Font size="42.0" />
+         </font>
+         <graphic>
+            <ImageView fx:id="swordView" fitHeight="96.0" fitWidth="313.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../GameAssets/Sword.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="heavyArmorButton1" layoutX="1499.0" layoutY="502.0" mnemonicParsing="false" onAction="#useAxe" onMouseClicked="#confirmSelect" onMouseEntered="#axeViewEnter" onMouseExited="#axeButtonExit" prefHeight="120.0" prefWidth="331.0">
+         <font>
+            <Font size="48.0" />
+         </font>
+         <graphic>
+            <ImageView fx:id="axeView" fitHeight="96.0" fitWidth="313.0" onMouseEntered="#axeViewEnter" onMouseExited="#axeButtonExit" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../GameAssets/Axe.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <ImageView fx:id="armorView" fitHeight="109.0" fitWidth="124.0" layoutX="1163.0" layoutY="643.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="nextButton" layoutX="472.0" layoutY="814.0" mnemonicParsing="false" onAction="#pickOpponent" onMouseClicked="#confirmSelect" onMouseEntered="#nextViewEnter" onMouseExited="#nextButtonExit" prefHeight="195.0" prefWidth="450.0">
+         <font>
+            <Font size="67.0" />
+         </font>
+         <graphic>
+            <ImageView fx:id="nextView" fitHeight="221.0" fitWidth="471.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../GameAssets/Next.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <ImageView fitHeight="106.0" fitWidth="432.0" layoutX="57.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Stats.PNG" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="427.0" layoutX="998.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../GameAssets/ArmorText.PNG" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="448.0" layoutX="1462.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../GameAssets/Weapon.PNG" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="116.0" fitWidth="287.0" layoutX="140.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../HP.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="133.0" fitWidth="278.0" layoutX="146.0" layoutY="280.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../DEF.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="133.0" fitWidth="278.0" layoutX="145.0" layoutY="474.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../SPD.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="133.0" fitWidth="278.0" layoutX="146.0" layoutY="371.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../ATK.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="spd" fill="#fff30b" layoutX="163.0" layoutY="540.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100" wrappingWidth="184.13671875">
+         <font>
+            <Font name="Copperplate Gothic Bold" size="53.0" />
+         </font>
+      </Text>
+      <Text fx:id="atk" fill="#fff30b" layoutX="169.0" layoutY="452.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" wrappingWidth="184.13671875">
+         <font>
+            <Font name="Copperplate Gothic Bold" size="53.0" />
+         </font>
+      </Text>
+      <Text fx:id="def" fill="#fff30b" layoutX="169.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" wrappingWidth="184.13671875">
+         <font>
+            <Font name="Copperplate Gothic Bold" size="53.0" />
+         </font>
+      </Text>
+      <Text fx:id="hp" fill="#fff30b" layoutX="169.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" wrappingWidth="184.13671875">
+         <font>
+            <Font name="Copperplate Gothic Bold" size="53.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="weaponView" fitHeight="109.0" fitWidth="124.0" layoutX="1613.0" layoutY="643.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>
