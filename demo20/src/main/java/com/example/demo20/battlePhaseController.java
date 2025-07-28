@@ -631,7 +631,7 @@ public class battlePhaseController {
 
         // Move to attack position and show charge image
         opponentView.setImage(hweiChargeImage);
-        opponentAction.setText("Mage channels arcane energy for a powerful spell!");
+        opponentAction.setText("Mage is charging!");
 
         mageChargeAnimation = new Timeline(
                 new KeyFrame(Duration.seconds(2), e -> {
@@ -671,6 +671,8 @@ public class battlePhaseController {
             thiefIdleAnimation.stop();
         } else if (opponentType.equals("Minotaur") && minotaurIdleAnimation != null) {
             minotaurIdleAnimation.stop();
+        } else if (opponentType.equals("Mage") && mageIdleAnimation != null) {
+            mageIdleAnimation.stop();
         }
     }
 
@@ -697,7 +699,7 @@ public class battlePhaseController {
                     } else if (opponentType.equals("Mage")) {  // Add this case
                         opponentView.setImage(hweiImage1);
                         showingFirstImage = true;
-                        opponentAction.setText("Mage is charging!");
+                        opponentAction.setText("Mage is playing with spells...");
                         startMageIdleAnimation();
                     }
                 })
