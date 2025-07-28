@@ -33,7 +33,7 @@ public abstract class Opponent {
     /**
      * The speed value of the opponent. Determines the turn order.
      */
-    private int speed;              // Speed value (determines turn order)
+    protected int speed;              // Speed value (determines turn order)
 
     // Battle state tracking
     /**
@@ -213,38 +213,7 @@ public abstract class Opponent {
     public void charge() {
         isCharging = true;
         System.out.println("ENEMY IS CHARGING!!!");
-        //Charge effects for Magician Enemy
-        if(name.equals("Magician")) {
-            Random r = new Random();
-            switch (r.nextInt(4)) {
-                case 0:
-                    // Fire
-                    attack += 5;
-                    System.out.println("Magician ability activated: Fire! +5 attack!");
-                    break;
-                case 1:
-                    // Wind
 
-                    speed += 5;
-                    System.out.println("Magician ability activated: Wind! +5 speed!");
-
-                    break;
-                case 2:
-                    // Water
-
-                    hitPoints += 10;
-                    System.out.println("Magician ability activated: Water! +10 health!");
-
-                    break;
-                case 3:
-                    // Earth
-
-                    defense += 3;
-                    System.out.println("Magician ability activated: Earth! +3 defense!");
-
-
-            }
-        }// Set charging state
     }
 
     // AI decision making - determines opponent's action based on their type and turn pattern

@@ -50,11 +50,15 @@ public class chooseOpponentController {
     ImageView backgroundView = new ImageView();
     @FXML
     ImageView opponenTextView = new ImageView();
+    @FXML
+    ImageView mageView = new ImageView();
     private Image image;
     public static Opponent opponent;
-    Opponent thief = new Thief();
-    Opponent viking = new Viking();
-    Opponent minotaur = new Minotaur();
+    Thief thief = new Thief();
+    Viking viking = new Viking();
+    Minotaur minotaur = new Minotaur();
+    Mage mage = new Mage();
+
     private Clip clip;
 
     public void initialize() {
@@ -66,6 +70,8 @@ public class chooseOpponentController {
         opponenTextView.setImage(opponentImage);
         Image minoImage = new Image(getClass().getResource("/GameAssets/Minotaur.png").toExternalForm());
         minotaurView.setImage(minoImage);
+        Image mageImage =   new Image(getClass().getResource("/GameAssets/Mage.png").toExternalForm());
+        mageView.setImage(mageImage);
 
         if(opponent!=null && opponent.getName().equals("Thief")) {
             System.out.println("works thief");
@@ -73,7 +79,7 @@ public class chooseOpponentController {
             def.setText(""+thief.getDefense());
             atk.setText(""+thief.getAttack());
             spd.setText(""+thief.getSpeed());
-            image = new Image(getClass().getResource("/OpponentAssets/thief.png").toExternalForm());
+            image = new Image(getClass().getResource("/OpponentAssets/thiefAura.jpg").toExternalForm());
             opponentView.setImage(image);
         }
         if(opponent!=null && opponent.getName().equals("Viking")) {
@@ -82,7 +88,7 @@ public class chooseOpponentController {
             def.setText(""+viking.getDefense());
             atk.setText(""+viking.getAttack());
             spd.setText(""+viking.getSpeed());
-            image = new Image(getClass().getResource("/OpponentAssets/viking.jpg").toExternalForm());
+            image = new Image(getClass().getResource("/OpponentAssets/olafAura.jpg").toExternalForm());
             opponentView.setImage(image);
         }
         if(opponent!=null && opponent.getName().equals("Minotaur")) {
@@ -91,7 +97,7 @@ public class chooseOpponentController {
             def.setText(""+minotaur.getDefense());
             atk.setText(""+minotaur.getAttack());
             spd.setText(""+minotaur.getSpeed());
-            image = new Image(getClass().getResource("/OpponentAssets/minotaur.png").toExternalForm());
+            image = new Image(getClass().getResource("/OpponentAssets/alistarAura.jpg").toExternalForm());
             opponentView.setImage(image);
         }
     }
@@ -102,7 +108,7 @@ public class chooseOpponentController {
         atk.setText(""+thief.getAttack());
         spd.setText(""+thief.getSpeed());
         opponent = thief;
-        image = new Image(getClass().getResource("/OpponentAssets/thief.png").toExternalForm());
+        image = new Image(getClass().getResource("/OpponentAssets/thiefAura.jpg").toExternalForm());
         opponentView.setImage(image);
 
     }
@@ -112,7 +118,7 @@ public class chooseOpponentController {
         atk.setText(""+viking.getAttack());
         spd.setText(""+viking.getSpeed());
         opponent = viking;
-        image = new Image(getClass().getResource("/OpponentAssets/viking.jpg").toExternalForm());
+        image = new Image(getClass().getResource("/OpponentAssets/olafAura.jpg").toExternalForm());
         opponentView.setImage(image);
     }
     public void minotaurSelect(ActionEvent e) {
@@ -121,8 +127,19 @@ public class chooseOpponentController {
         atk.setText(""+minotaur.getAttack());
         spd.setText(""+minotaur.getSpeed());
         opponent = minotaur;
-        image = new Image(getClass().getResource("/OpponentAssets/minotaur.png").toExternalForm());
+        image = new Image(getClass().getResource("/OpponentAssets/alistarAura.jpg").toExternalForm());
         opponentView.setImage(image);
+    }
+
+    public void mageSelect(ActionEvent e) {
+        hp.setText(""+mage.getHitPoints());
+        def.setText(""+mage.getDefense());
+        atk.setText(""+mage.getAttack());
+        spd.setText(""+mage.getSpeed());
+        opponent = mage;
+        image = new Image(getClass().getResource("/OpponentAssets/hweiAura.jpg").toExternalForm());
+        opponentView.setImage(image);
+
     }
     public void thiefButtonEnter(MouseEvent e)  {
         Image hoverImage = new Image(getClass().getResource("/GameAssets/Hover.png").toExternalForm());
@@ -152,6 +169,16 @@ public class chooseOpponentController {
     public void minotaurButtonExit(MouseEvent e) {   // Changed to MouseEvent
         Image normalImage = new Image(getClass().getResource("/GameAssets/Minotaur.png").toExternalForm());
         minotaurView.setImage(normalImage);
+    }
+    public void mageButtonEnter(MouseEvent e)  {
+        Image hoverImage = new Image(getClass().getResource("/GameAssets/Hover.png").toExternalForm());
+        mageView.setImage(hoverImage);
+
+        playSelectSound();
+    }
+    public void mageButtonExit(MouseEvent e) {   // Changed to MouseEvent
+        Image normalImage = new Image(getClass().getResource("/GameAssets/Mage.png").toExternalForm());
+        mageView.setImage(normalImage);
     }
     public void nextButtonEnter(MouseEvent e)  {
         Image hoverImage = new Image(getClass().getResource("/GameAssets/Hover.png").toExternalForm());

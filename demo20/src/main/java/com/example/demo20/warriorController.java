@@ -26,6 +26,8 @@ public class warriorController {
     private  Armor lightArmor = new Armor("Light Armor", 20, 5);
     private  Armor mediumArmor = new Armor("Medium Armor", 30, 15);
     private  Armor heavyArmor = new Armor("Heavy Armor", 40, 25);
+    private Armor Nothing = new Armor("Nothing",1,0);
+    private Staff staff = new Staff();
     @FXML
     private  Text hp = new Text();
     @FXML
@@ -53,18 +55,39 @@ public class warriorController {
     @FXML
     ImageView axeView = new ImageView();
     @FXML
+    ImageView staffView = new ImageView();
+    @FXML
     ImageView lightView = new ImageView();
     @FXML
     ImageView mediumView = new ImageView();
     @FXML
     ImageView heavyView = new ImageView();
     @FXML
+    ImageView nothingView = new ImageView();
+    @FXML
     ImageView nextView = new ImageView();
+
 
 
     private Clip clip;
 
     public void initialize() {
+        Image daggerButton = new Image(getClass().getResource("/GameAssets/Dagger.png").toExternalForm());
+        daggerView.setImage(daggerButton);
+        Image swordButton = new Image(getClass().getResource("/GameAssets/Sword.png").toExternalForm());
+        swordView.setImage(swordButton);
+        Image axeButton = new Image(getClass().getResource("/GameAssets/Axe.png").toExternalForm());
+        axeView.setImage(axeButton);
+        Image staffButton = new Image(getClass().getResource("/GameAssets/Staff.png").toExternalForm());
+        staffView.setImage(staffButton);
+        Image lightButton = new Image(getClass().getResource("/GameAssets/Light.png").toExternalForm());
+        lightView.setImage(lightButton);
+        Image mediumButton = new Image(getClass().getResource("/GameAssets/Medium.png").toExternalForm());
+        mediumView.setImage(mediumButton);
+        Image heavyButton = new Image(getClass().getResource("/GameAssets/Heavy.png").toExternalForm());
+        heavyView.setImage(heavyButton);
+        Image nothingButton = new Image(getClass().getResource("/GameAssets/Nothing.png").toExternalForm());
+        nothingView.setImage(nothingButton);
 
         hp.setText(""+warrior.getHitPoints());
         def.setText(""+warrior.getDefense());
@@ -112,7 +135,7 @@ public class warriorController {
 
 
     public void wearLightArmor(ActionEvent e) {
-
+        armorView.setVisible(true);
         warrior.setDefense(1);
         if(warrior.getWeapon() != null) {
             warrior.setSpeed(50 - warrior.getWeapon().getSpeedPenalty());
@@ -128,7 +151,7 @@ public class warriorController {
     }
 
     public void wearMediumArmor(ActionEvent e) {
-
+        armorView.setVisible(true);
         warrior.setDefense(1);
         if(warrior.getWeapon() != null) {
             warrior.setSpeed(50 - warrior.getWeapon().getSpeedPenalty());
@@ -143,9 +166,10 @@ public class warriorController {
 
     }
 
+
     public void wearHeavyArmor(ActionEvent e) {
 
-
+        armorView.setVisible(true);
         warrior.setDefense(1);
         if(warrior.getWeapon() != null) {
             warrior.setSpeed(50 - warrior.getWeapon().getSpeedPenalty());
@@ -158,6 +182,23 @@ public class warriorController {
         setStats();
         Image heavyArmorImage = new Image(getClass().getResource("/WarriorAssets/heavyarmor.jpg").toExternalForm());
         armorView.setImage(heavyArmorImage);
+
+    }
+    public void wearNothing(ActionEvent e) {
+
+
+        warrior.setDefense(1);
+        if(warrior.getWeapon() != null) {
+            warrior.setSpeed(50 - warrior.getWeapon().getSpeedPenalty());
+        }
+        else {
+            warrior.setSpeed(50);
+        }
+
+        warrior.equip(Nothing);
+        setStats();
+
+        armorView.setVisible(false);
 
     }
 
@@ -206,6 +247,22 @@ public class warriorController {
 
     }
 
+
+    public void useStaff() {
+        warrior.setAttack(1);
+        if(warrior.getArmor() != null) {
+            warrior.setSpeed(50 - warrior.getArmor().getSpeedPenalty());
+        }
+        else {
+            warrior.setSpeed(50);
+        }
+        warrior.equip(staff);
+        setStats();
+        Image staffImage = new Image(getClass().getResource("/WarriorAssets/Staff.jpg").toExternalForm());
+        weaponView.setImage(staffImage);
+
+    }
+
     public void daggerViewEnter(MouseEvent e) {
         Image hoverImage = new Image(getClass().getResource("/GameAssets/Hover.png").toExternalForm());
         daggerView.setImage(hoverImage);
@@ -228,6 +285,31 @@ public class warriorController {
         Image normalImage = new Image(getClass().getResource("/GameAssets/Axe.png").toExternalForm());
         axeView.setImage(normalImage);
     }
+
+    public void staffViewEnter(MouseEvent e)  {
+        Image hoverImage = new Image(getClass().getResource("/GameAssets/Hover.png").toExternalForm());
+        staffView.setImage(hoverImage);
+        playSelectSound();
+
+
+    }
+    public void staffButtonExit(MouseEvent e) {   // Changed to MouseEvent
+        Image normalImage = new Image(getClass().getResource("/GameAssets/Staff.png").toExternalForm());
+        staffView.setImage(normalImage);
+    }
+
+    public void nothingButtonExit(MouseEvent e) {   // Changed to MouseEvent
+        Image normalImage = new Image(getClass().getResource("/GameAssets/Nothing.png").toExternalForm());
+        nothingView.setImage(normalImage);
+    }
+    public void nothingViewEnter(MouseEvent e)  {
+        Image hoverImage = new Image(getClass().getResource("/GameAssets/Hover.png").toExternalForm());
+        nothingView.setImage(hoverImage);
+        playSelectSound();
+
+
+    }
+
     public void lightViewEnter(MouseEvent e)  {
         Image hoverImage = new Image(getClass().getResource("/GameAssets/Hover.png").toExternalForm());
         lightView.setImage(hoverImage);

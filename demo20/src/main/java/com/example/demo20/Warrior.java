@@ -288,7 +288,11 @@ public class Warrior {
         }
         isCharging = true;
         System.out.println("WARRIOR IS CHARGING!!!");
+        if(weapon.getName().equals("Staff")) {
+
+        }
         return true;
+
     }
 
     public boolean isDefendedLastTurn() {

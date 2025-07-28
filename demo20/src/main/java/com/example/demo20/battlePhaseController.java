@@ -48,6 +48,7 @@ public class battlePhaseController {
     @FXML private Text opponentDefense;
     @FXML private Text opponentAttack;
     @FXML private Text opponentSpeed;
+    @FXML private Text environmentEffect;
 
     // Action Buttons
     @FXML private Button attackButton;
@@ -70,6 +71,7 @@ public class battlePhaseController {
     @FXML private ImageView warriorActionView;
     @FXML private Text warriorAction;
     @FXML private Text opponentAction;
+    @FXML private ImageView environmentImageView;
 
     // ==================== ANIMATION VARIABLES ====================
     // Viking/Olaf Animation
@@ -98,6 +100,17 @@ public class battlePhaseController {
     private Image alistarAttackImage;
     private Image alistarChargeImage;
     private Image alistarCritImage;
+
+    private Timeline mageIdleAnimation;
+    private Timeline mageAttackAnimation;
+    private Timeline mageChargeAnimation;
+    private Timeline mageCritAnimation;
+    private Image hweiImage1;
+    private Image hweiImage2;
+    private Image hweiAttackImage;
+    private Image hweiChargeImage;
+    private Image hweiCritImage;
+
 
     // General Animation Control
     private boolean showingFirstImage = true;
@@ -145,11 +158,14 @@ public class battlePhaseController {
         Image chargePNG = new Image(getClass().getResource("/GameAssets/Charge.png").toExternalForm());
         Image textFieldPng = new Image(getClass().getResource("/GameAssets/textArea.png").toExternalForm());
 
+
         attackView.setImage(attackPNG);
         defendView.setImage(defendPNG);
         chargeView.setImage(chargePNG);
         warriorActionView.setImage(textFieldPng);
         opponentActionView.setImage(textFieldPng);
+        environmentImageView.setImage(textFieldPng);
+        environmentImageView.setVisible(false);
 
         // Load stat icons
         Image hpPNG = new Image(getClass().getResource("/HP.png").toExternalForm());
@@ -195,6 +211,9 @@ public class battlePhaseController {
                 Image heavyArmorImage = new Image(getClass().getResource("/WarriorAssets/heavyarmor.jpg").toExternalForm());
                 armorView.setImage(heavyArmorImage);
                 break;
+            case "Nothing":
+                armorView.setImage(null);
+                break;
         }
     }
 
@@ -212,6 +231,10 @@ public class battlePhaseController {
                 Image axeImage = new Image(getClass().getResource("/WarriorAssets/Battleaxer.jpg").toExternalForm());
                 weaponView.setImage(axeImage);
                 break;
+            case "Staff":
+                Image staffImage = new Image(getClass().getResource("/WarriorAssets/Staff.jpg").toExternalForm());
+                weaponView.setImage(staffImage);
+                break;
         }
     }
 
@@ -228,6 +251,10 @@ public class battlePhaseController {
             case "Minotaur":
                 setupMinotaurImages();
                 startMinotaurIdleAnimation();
+                break;
+            case "Mage":  // Add this case
+                setupMageImages();
+                startMageIdleAnimation();
                 break;
         }
     }
@@ -256,6 +283,17 @@ public class battlePhaseController {
         opponentView.setImage(alistarImage1);
     }
 
+
+
+    private void setupMageImages() {
+        hweiImage1 = new Image(getClass().getResource("/OpponentAssets/hwei1.png").toExternalForm());
+        hweiImage2 = new Image(getClass().getResource("/OpponentAssets/hwei2.png").toExternalForm());
+        hweiAttackImage = new Image(getClass().getResource("/OpponentAssets/hweiAttack.png").toExternalForm());
+        hweiChargeImage = new Image(getClass().getResource("/OpponentAssets/hweiCharge.png").toExternalForm());
+        hweiCritImage = new Image(getClass().getResource("/OpponentAssets/hweiCrit.png").toExternalForm());
+        opponentView.setImage(hweiImage1);
+    }
+
     private void initializeEnvironment() {
         Image environmentImage;
         switch(environment.getEnvironmentName()) {
@@ -275,9 +313,89 @@ public class battlePhaseController {
     }
 
     private void initializeStats() {
-        environment.environmentEffects(warrior, opponent);
-        setStats();
+        // Show initial environment effects when game starts
+        showInitialEnvironmentEffects();
+
+        // Apply the actual effects after showing the text
+        Timeline applyEffectsTimeline = new Timeline(
+                new KeyFrame(Duration.seconds(3.0), e -> {
+                    environment.environmentEffects(warrior, opponent);
+                    setStats();
+                })
+        );
+        applyEffectsTimeline.play();
     }
+    private void showInitialEnvironmentEffects() {
+        // Make environment text area visible
+        environmentImageView.setVisible(true);
+
+        String environmentName = environment.getEnvironmentName();
+
+        if (environmentName.equals("Swamp")) {
+            // Show initial environment description
+            environmentEffect.setText("Entering the Swamp...");
+
+            Timeline descriptionTimeline = new Timeline(
+                    new KeyFrame(Duration.seconds(1.5), e -> {
+                        environmentEffect.setText("Swamp Effect: Warrior loses 1 HP per turn, Enemy gains 1 Attack per turn");
+                    })
+            );
+
+            // Hide after showing the description
+            Timeline hideTimeline = new Timeline(
+                    new KeyFrame(Duration.seconds(4.0), e -> {
+                        environmentImageView.setVisible(false);
+                        environmentEffect.setText("");
+                    })
+            );
+
+            descriptionTimeline.play();
+            hideTimeline.play();
+
+        } else if (environmentName.equals("Colosseum")) {
+            // Show initial environment description
+            environmentEffect.setText("Entering the Colosseum...");
+
+            Timeline descriptionTimeline = new Timeline(
+                    new KeyFrame(Duration.seconds(1.5), e -> {
+                        environmentEffect.setText("Colosseum Effect: Warrior gains 1 Attack per turn, Enemy loses 1 Defense per turn");
+                    })
+            );
+
+            // Hide after showing the description
+            Timeline hideTimeline = new Timeline(
+                    new KeyFrame(Duration.seconds(4.0), e -> {
+                        environmentImageView.setVisible(false);
+                        environmentEffect.setText("");
+                    })
+            );
+
+            descriptionTimeline.play();
+            hideTimeline.play();
+
+        } else if (environmentName.equals("Arena")) {
+            // Show initial environment description
+            environmentEffect.setText("Entering the Arena...");
+
+            Timeline descriptionTimeline = new Timeline(
+                    new KeyFrame(Duration.seconds(1.5), e -> {
+                        environmentEffect.setText("Arena: A neutral battleground with no environmental effects");
+                    })
+            );
+
+            // Hide after showing the description
+            Timeline hideTimeline = new Timeline(
+                    new KeyFrame(Duration.seconds(4.0), e -> {
+                        environmentImageView.setVisible(false);
+                        environmentEffect.setText("");
+                    })
+            );
+
+            descriptionTimeline.play();
+            hideTimeline.play();
+        }
+    }
+
 
     // ==================== ANIMATION METHODS ====================
     private void startVikingIdleAnimation() {
@@ -326,6 +444,22 @@ public class battlePhaseController {
         );
         minotaurIdleAnimation.setCycleCount(Timeline.INDEFINITE);
         minotaurIdleAnimation.play();
+    }
+
+    private void startMageIdleAnimation() {
+        mageIdleAnimation = new Timeline(
+                new KeyFrame(Duration.seconds(1.5), e -> {
+                    if (showingFirstImage) {
+                        opponentView.setImage(hweiImage2);
+                        showingFirstImage = false;
+                    } else {
+                        opponentView.setImage(hweiImage1);
+                        showingFirstImage = true;
+                    }
+                })
+        );
+        mageIdleAnimation.setCycleCount(Timeline.INDEFINITE);
+        mageIdleAnimation.play();
     }
 
     private void playWarriorAttackAnimation() {
@@ -466,6 +600,70 @@ public class battlePhaseController {
         minotaurCritAnimation.play();
     }
 
+    private void playMageAttackAnimation() {
+        stopIdleAnimation("Mage");
+        double originalX = opponentView.getLayoutX();
+
+        // Play Mage attack sound
+        playEnemySound("mageAttack.wav");
+
+        // Move to attack position and show attack image
+        opponentView.setLayoutX(428);
+        opponentView.setImage(hweiAttackImage);
+        opponentAction.setText("Mage casts a destructive spell!");
+
+        mageAttackAnimation = new Timeline(
+                new KeyFrame(Duration.seconds(2), e -> {
+                    // Return to original position
+                    opponentView.setLayoutX(1036);
+                    returnToIdleWithDelay("Mage");
+                })
+        );
+        mageAttackAnimation.play();
+    }
+
+    private void playMageChargeAnimation() {
+        stopIdleAnimation("Mage");
+        double originalX = opponentView.getLayoutX();
+
+        // Play Mage charge sound
+        playEnemySound("mageCharge.wav");
+
+        // Move to attack position and show charge image
+        opponentView.setImage(hweiChargeImage);
+        opponentAction.setText("Mage channels arcane energy for a powerful spell!");
+
+        mageChargeAnimation = new Timeline(
+                new KeyFrame(Duration.seconds(2), e -> {
+                    // Return to original position
+                    opponentView.setLayoutX(1036);
+                    returnToIdleWithDelay("Mage");
+                })
+        );
+        mageChargeAnimation.play();
+    }
+
+    private void playMageCritAnimation() {
+        stopIdleAnimation("Mage");
+        double originalX = opponentView.getLayoutX();
+
+        // Move to attack position and show crit image
+        opponentView.setLayoutX(428);
+        opponentView.setImage(hweiCritImage);
+        opponentAction.setText("Mage unleashes a devastating magical explosion!");
+
+        mageCritAnimation = new Timeline(
+                new KeyFrame(Duration.seconds(2), e -> { // Longer duration for crit
+                    // Return to original position
+                    opponentView.setLayoutX(1036);
+                    returnToIdleWithDelay("Mage");
+                })
+        );
+        mageCritAnimation.play();
+    }
+
+
+
     private void stopIdleAnimation(String opponentType) {
         if (opponentType.equals("Viking") && vikingIdleAnimation != null) {
             vikingIdleAnimation.stop();
@@ -475,6 +673,8 @@ public class battlePhaseController {
             minotaurIdleAnimation.stop();
         }
     }
+
+
 
     private void returnToIdleWithDelay(String opponentType) {
         Timeline delayTimeline = new Timeline(
@@ -494,6 +694,11 @@ public class battlePhaseController {
                         showingFirstImage = true;
                         opponentAction.setText("Minotaur stomps the ground menacingly");
                         startMinotaurIdleAnimation();
+                    } else if (opponentType.equals("Mage")) {  // Add this case
+                        opponentView.setImage(hweiImage1);
+                        showingFirstImage = true;
+                        opponentAction.setText("Mage is charging!");
+                        startMageIdleAnimation();
                     }
                 })
         );
@@ -510,9 +715,13 @@ public class battlePhaseController {
         if (minotaurAttackAnimation != null) minotaurAttackAnimation.stop();
         if (minotaurChargeAnimation != null) minotaurChargeAnimation.stop();
         if (minotaurCritAnimation != null) minotaurCritAnimation.stop();
+        // Add these lines for Mage
+        if (mageIdleAnimation != null) mageIdleAnimation.stop();
+        if (mageAttackAnimation != null) mageAttackAnimation.stop();
+        if (mageChargeAnimation != null) mageChargeAnimation.stop();
+        if (mageCritAnimation != null) mageCritAnimation.stop();
         if (combatDelayTimeline != null) combatDelayTimeline.stop();
     }
-
     // ==================== COMBAT CONTROL METHODS ====================
     private void setButtonsDisabled(boolean disabled) {
         attackButton.setDisable(disabled);
@@ -568,14 +777,15 @@ public class battlePhaseController {
                     dmg = warrior.getDamageDealt(opponent);
 
                     // Delay before warrior attacks
+                    int finalDmg = dmg;
                     Timeline delayTimeline = new Timeline(
                             new KeyFrame(Duration.seconds(2.0), event -> {
                                 warrior.attack(opponent);
                                 playWarriorAttackAnimation();
+                                warriorAction.setText("Warrior attacks Viking for " + finalDmg + " dmg");
                                 setStats();
                             })
                     );
-                    warriorAction.setText("Warrior attacks Viking for " + dmg + " dmg");
                     delayTimeline.play();
                 } else if (warrior.getSpeed() > opponent.getSpeed()) {
                     // Warrior acts first
@@ -598,14 +808,15 @@ public class battlePhaseController {
                     dmg = warrior.getDamageDealt(opponent);
 
                     // Delay before warrior attacks
+                    int finalDmg1 = dmg;
                     Timeline delayTimeline = new Timeline(
                             new KeyFrame(Duration.seconds(2.0), event -> {
                                 warrior.attack(opponent);
                                 playWarriorAttackAnimation();
+                                warriorAction.setText("Warrior attacks " + opponentName + " for " + finalDmg1 + " dmg");
                                 setStats();
                             })
                     );
-                    warriorAction.setText("Warrior attacks " + opponentName + " for " + dmg + " dmg");
                     delayTimeline.play();
                 }
 
@@ -619,9 +830,6 @@ public class battlePhaseController {
                             if(warrior.getWeapon().getName().equals("Sword") && !charged) {
                                 warrior.setAttack(warrior.getAttack()-10);
                             }
-
-                            // Axe charge attack and speed reduction
-
 
                             // Reset opponent defending state
                             opponent.setDefending(false);
@@ -647,14 +855,12 @@ public class battlePhaseController {
                     warriorAction.setText("Warrior dagger ability activated!");
                 } else {
                     warrior.defend();
-                    warriorAction.setText("Warrior raises shield defensively");
+                    warriorAction.setText("Warrior is defending!");
                 }
 
                 // Delay before opponent responds
                 Timeline delayTimeline = new Timeline(
                         new KeyFrame(Duration.seconds(1.5), event -> {
-                            // Use handleOpponentResponse instead of handleOpponentAttack
-                            // This will properly check for Viking's defend behavior
                             handleOpponentResponse();
                             setStats();
 
@@ -680,13 +886,10 @@ public class battlePhaseController {
         });
         opponent.setDefending(false);
     }
+
     public void warriorCharge(ActionEvent e) throws IOException {
         processCombatWithDelay(e, () -> {
             try {
-                if(warrior.getWeapon().getName().equals("Axe")) {
-                    warrior.getWeapon().weapon_ability(warrior);
-                    setStats();
-                }
                 if (!warrior.isCharging()) {
                     // Special case: Viking defending always goes first
                     if (opponent.getName().equals("Viking") && faux == 2) {
@@ -698,7 +901,15 @@ public class battlePhaseController {
                         Timeline delayTimeline = new Timeline(
                                 new KeyFrame(Duration.seconds(2.0), event -> {
                                     warrior.charge();
-                                    warriorAction.setText("Warrior builds momentum for a powerful charge!");
+                                    warriorAction.setText("Warrior is charging!");
+                                    if(warrior.getWeapon().getName().equals("Axe")) {
+                                        warrior.getWeapon().weapon_ability(warrior);
+                                        warriorAction.setText("Warrior is charging, axe ability activated!");
+                                    }
+                                    else if(warrior.getWeapon().getName().equals("Staff")) {
+                                        warrior.getWeapon().weapon_ability(warrior);
+                                        warriorAction.setText("Warrior is charging, staff ability activated!");
+                                    }
                                     setStats();
                                 })
                         );
@@ -706,7 +917,16 @@ public class battlePhaseController {
                     } else if (warrior.getSpeed() > opponent.getSpeed()) {
                         // Warrior acts first
                         warrior.charge();
-                        warriorAction.setText("Warrior builds momentum for a powerful charge!");
+                        if(warrior.getWeapon().getName().equals("Axe")) {
+                            warrior.getWeapon().weapon_ability(warrior);
+                            warriorAction.setText("Warrior is charging, axe ability activated!");
+                        }
+                        else if(warrior.getWeapon().getName().equals("Staff")) {
+                            warrior.getWeapon().weapon_ability(warrior);
+                            warriorAction.setText("Warrior is charging, staff ability activated!");
+                        } else {
+                            warriorAction.setText("Warrior builds momentum for a powerful charge!");
+                        }
                         setStats();
 
                         // Delay before opponent responds
@@ -724,7 +944,16 @@ public class battlePhaseController {
                         Timeline delayTimeline = new Timeline(
                                 new KeyFrame(Duration.seconds(2.0), event -> {
                                     warrior.charge();
-                                    warriorAction.setText("Warrior charges forward with determination!");
+                                    if(warrior.getWeapon().getName().equals("Axe")) {
+                                        warrior.getWeapon().weapon_ability(warrior);
+                                        warriorAction.setText("Warrior is charging, axe ability activated!");
+                                    }
+                                    else if(warrior.getWeapon().getName().equals("Staff")) {
+                                        warrior.getWeapon().weapon_ability(warrior);
+                                        warriorAction.setText("Warrior is charging, staff ability activated!");
+                                    } else {
+                                        warriorAction.setText("Warrior is charging!");
+                                    }
                                     setStats();
                                 })
                         );
@@ -740,6 +969,7 @@ public class battlePhaseController {
                     );
                     environmentDelayTimeline.play();
                 } else {
+                    // This happens immediately since it's just a message
                     warriorAction.setText("Warrior is already building up charge!");
                     System.out.println("Already charging.\n");
                     incrementFaux();
@@ -748,6 +978,7 @@ public class battlePhaseController {
                 ex.printStackTrace();
             }
         });
+
         opponent.setDefending(false);
     }
 
@@ -779,12 +1010,25 @@ public class battlePhaseController {
                 playMinotaurAttackAnimation();
             }
             opponent.think(warrior, faux);
+        } else if (opponentName.equals("Mage")) {  // Add this case
+            if (faux == 3) {
+                // Mage does critical attack on faux == 3
+                playMageCritAnimation();
+            } else if (faux == 2) {
+                // Mage charges on faux == 2
+                playMageChargeAnimation();
+            } else {
+                // Mage attacks normally on faux == 1
+                playMageAttackAnimation();
+            }
+            opponent.think(warrior, faux);
         } else {
             // Default behavior for other opponents
             opponent.think(warrior, faux);
         }
     }
 
+    // Update your handleOpponentAttack method (around line 1090):
     private void handleOpponentAttack() {
         String opponentName = opponent.getName();
 
@@ -800,6 +1044,13 @@ public class battlePhaseController {
             } else {
                 playMinotaurAttackAnimation();
             }
+        } else if (opponentName.equals("Mage")) {  // Add this case
+            if (faux == 3) {
+                // Mage does critical attack on faux == 3
+                playMageCritAnimation();
+            } else {
+                playMageAttackAnimation();
+            }
         } else {
             opponentAction.setText(opponentName + " attacks!");
         }
@@ -808,8 +1059,102 @@ public class battlePhaseController {
     // ==================== UTILITY METHODS ====================
     private void applyEnvironmentEffects() {
         if (gameOver == 0) {
+            // Make environment text area visible
+            environmentImageView.setVisible(true);
+
+            String environmentName = environment.getEnvironmentName();
+
+            if (environmentName.equals("Swamp")) {
+                // Show warrior effect first
+                environmentEffect.setText("Swamp Effect: Warrior loses 1 HP!");
+
+                // Apply warrior effect after delay
+                Timeline warriorEffectTimeline = new Timeline(
+                        new KeyFrame(Duration.seconds(1.5), e -> {
+                            // Apply the actual effect (you'll need to implement this in your Environment class)
+                            // For now, applying directly here based on your description
+                            warrior.setHitPoints(warrior.getHitPoints() - 1);
+                            setStats();
+
+                            // Show enemy effect
+                            environmentEffect.setText("Swamp Effect: Enemy gains 1 Attack!");
+                        })
+                );
+
+                // Apply enemy effect after another delay
+                Timeline enemyEffectTimeline = new Timeline(
+                        new KeyFrame(Duration.seconds(3.0), e -> {
+                            // Apply enemy effect
+                            opponent.setAttack(opponent.getAttack() + 1);
+                            setStats();
+
+                            // Hide environment text after showing both effects
+                            Timeline hideTimeline = new Timeline(
+                                    new KeyFrame(Duration.seconds(1.5), hideEvent -> {
+                                        environmentImageView.setVisible(false);
+                                        environmentEffect.setText("");
+                                    })
+                            );
+                            hideTimeline.play();
+                        })
+                );
+
+                warriorEffectTimeline.play();
+                enemyEffectTimeline.play();
+
+            } else if (environmentName.equals("Colosseum")) {
+                // Show warrior effect first
+                environmentEffect.setText("Colosseum Effect: Warrior gains 1 Attack!");
+
+                // Apply warrior effect after delay
+                Timeline warriorEffectTimeline = new Timeline(
+                        new KeyFrame(Duration.seconds(1.5), e -> {
+                            // Apply warrior effect
+                            warrior.setAttack(warrior.getAttack() + 1);
+                            setStats();
+
+                            // Show enemy effect
+                            environmentEffect.setText("Colosseum Effect: Enemy loses 1 Defense!");
+                        })
+                );
+
+                // Apply enemy effect after another delay
+                Timeline enemyEffectTimeline = new Timeline(
+                        new KeyFrame(Duration.seconds(3.0), e -> {
+                            // Apply enemy effect
+                            opponent.setDefense(opponent.getDefense() - 1);
+                            setStats();
+
+                            // Hide environment text after showing both effects
+                            Timeline hideTimeline = new Timeline(
+                                    new KeyFrame(Duration.seconds(1.5), hideEvent -> {
+                                        environmentImageView.setVisible(false);
+                                        environmentEffect.setText("");
+                                    })
+                            );
+                            hideTimeline.play();
+                        })
+                );
+
+                warriorEffectTimeline.play();
+                enemyEffectTimeline.play();
+
+            } else if (environmentName.equals("Arena")) {
+                // Arena has no effects, just show a message briefly
+                environmentEffect.setText("Arena: No environmental effects");
+
+                Timeline hideTimeline = new Timeline(
+                        new KeyFrame(Duration.seconds(2.0), e -> {
+                            environmentImageView.setVisible(false);
+                            environmentEffect.setText("");
+                        })
+                );
+                hideTimeline.play();
+            }
+
+            // Call the original environment effects method if it exists
+            // This ensures any other logic in your Environment class still runs
             environment.environmentEffects(warrior, opponent);
-            setStats();
         }
     }
 

@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -133,6 +134,7 @@ public class startController {
         Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
         String css = getClass().getResource("Bro.css").toExternalForm();
         scene.getStylesheets().add(css);
+
         stage.setTitle("Character Creation");
         stage.setScene(scene);
         stage.show();
